@@ -1,6 +1,6 @@
 <div align="center">
   <h1 align="center">GeoNotes.io</h1>
-  <h3>GeoNotes.io is the fastest-growing open source platform for community-contributed Street View notes to sharpen your GeoGuessr game</h3>
+  <h3>GeoNotes.io is the open source platform for community-contributed Street View notes to sharpen your GeoGuessr game</h3>
 </div>
 
 <div align="center">
