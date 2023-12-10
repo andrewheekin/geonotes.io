@@ -1,4 +1,22 @@
+<div align="center">
+  <h1 align="center">GeoNotes.io</h1>
+  <h3>GeoNotes.io is the fastest-growing open source platform for community-contributed Street View notes to sharpen your GeoGuessr game</h3>
+</div>
 
+<div align="center">
+  <a href="https://geonotes.io">geonotes.io</a>
+</div>
+
+<br/>
+
+<div align="center">
+  <a href="https://github.com/andrewheekkin/geonotes.io/stargazers"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/andrewheekin/geonotes.io"></a>
+  <a href="https://github.com/andrewheekin/geonotes.io/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-AGPLv3-purple"></a>
+</div>
+
+<br/>
+
+GeoNotes.io is the fastest-growing open source platform for community-contributed Street View notes to sharpen your GeoGuessr game. Built with Next.js on [Vercel](http://vercel.com/) and [Supabase](https://supabase.com/).
 
 
 
