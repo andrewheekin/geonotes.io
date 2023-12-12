@@ -18,6 +18,9 @@
 
 GeoNotes.io is the open source platform for community-contributed Street View notes to sharpen your GeoGuessr game. Built with Next.js on [Vercel](http://vercel.com/) and [Supabase](https://supabase.com/).
 
+![2023-12-12-geonotes-1](https://github.com/andrewheekin/geonotes.io/assets/4684591/5929cf54-278d-42d7-b446-b6bf3cf22b22)
+
+
 ## Contributing
 GeoNotes is open source and contributions are welcome!
 
