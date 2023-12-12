@@ -22,7 +22,7 @@ GeoNotes.io is the open source platform for community-contributed Street View no
 <div align="center">
   <img src="https://github.com/andrewheekin/geonotes.io/assets/4684591/9c112c93-6f14-46fb-b5e1-d0144fbf6668">
 </div>
-
+<br />
 <div align="center">
   <img src="https://github.com/andrewheekin/geonotes.io/assets/4684591/178a0a9c-7717-4a1b-bd20-3f7a1db8a163">
 </div>
