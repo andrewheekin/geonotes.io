@@ -50,7 +50,7 @@ export default function CountriesAutocomplete({ setSelectedCountries }) {
         color="text.secondary"
         style={{ fontSize: "0.7rem", fontFamily: "monospace", color: "grey", margin: "0" }}
       >
-        <sup>*</sup>matches ANY
+        matches ANY
       </Typography>
     </>
   );

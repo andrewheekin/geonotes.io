@@ -12,27 +12,13 @@ export default async function Home() {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center' }}>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          style={{
-            fontFamily: 'monospace',
-            color: 'black',
-            margin: '0px 0 10px 0',
-            background: '#89dc89',
-            padding: '10px',
-            borderRadius: '10px',
-            width: '50%',
-            justifyContent: 'center',
-          }}
+      <div className="flex flex-row items-start justify-center">
+        <p
+          className="font-mono text-black my-0 mx-4 mb-4 bg-green-300 p-2 rounded-lg justify-center max-w-[900px] px-2"
         >
           GeoNotes.io is looking for open source contributors 👀 If you are interested in helping build the site,
-          visit our <a href="https://github.com/andrewheekin/geonotes.io/issues" style={{
-            color: 'navy',
-            textDecoration: 'underline',
-          }}>GitHub</a>!
-        </Typography>
+          visit our <a href="https://github.com/andrewheekin/geonotes.io/issues" className="text-blue-800 underline">GitHub</a>!
+        </p>
       </div>
       <Suspense>
         <GeoNotesContainer geoNotes={geoNotes} />
