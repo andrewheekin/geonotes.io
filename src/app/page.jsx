@@ -28,7 +28,7 @@ export default async function Home() {
           }}
         >
           GeoNotes.io is looking for open source contributors! If you are interested in helping build the site,
-          pick up an issue at <a href="https://github.com/andrewheekin/geonotes.io/issues" style={{
+          pick up an issue on <a href="https://github.com/andrewheekin/geonotes.io/issues" style={{
             color: 'navy',
             textDecoration: 'underline',
           }}>GitHub</a>!
