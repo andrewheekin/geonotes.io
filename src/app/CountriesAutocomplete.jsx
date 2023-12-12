@@ -35,7 +35,7 @@ export default function CountriesAutocomplete({ setSelectedCountries }) {
           );
         }}
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label={<Typography style={{ fontFamily: "monospace", fontSize: '0.9rem' }}>Choose countries</Typography>} fullWidth />
+          <TextField {...params} variant="outlined" label={<Typography style={{ fontFamily: "monospace", fontSize: '0.9rem' }}>Countries</Typography>} fullWidth />
         )}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => {
@@ -50,7 +50,7 @@ export default function CountriesAutocomplete({ setSelectedCountries }) {
         color="text.secondary"
         style={{ fontSize: "0.7rem", fontFamily: "monospace", color: "grey", margin: "0" }}
       >
-        <sup>*</sup>matches ANY country if multiple
+        <sup>*</sup>matches ANY
       </Typography>
     </>
   );

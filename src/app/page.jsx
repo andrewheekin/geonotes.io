@@ -20,15 +20,15 @@ export default async function Home() {
             fontFamily: 'monospace',
             color: 'black',
             margin: '0px 0 10px 0',
-            background: '#c6fbc6',
+            background: '#89dc89',
             padding: '10px',
             borderRadius: '10px',
             width: '50%',
             justifyContent: 'center',
           }}
         >
-          GeoNotes.io is looking for open source contributors! If you are interested in helping build the site,
-          pick up an issue on <a href="https://github.com/andrewheekin/geonotes.io/issues" style={{
+          GeoNotes.io is looking for open source contributors 👀 If you are interested in helping build the site,
+          visit our <a href="https://github.com/andrewheekin/geonotes.io/issues" style={{
             color: 'navy',
             textDecoration: 'underline',
           }}>GitHub</a>!
