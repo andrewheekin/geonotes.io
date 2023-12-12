@@ -13,6 +13,7 @@
     "@clerk/themes": "^1.7.9",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.14.16",
     "@supabase/supabase-js": "^2.38.4",
     "@vercel/analytics": "^1.1.1",
