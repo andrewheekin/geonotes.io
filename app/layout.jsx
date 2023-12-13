@@ -2,13 +2,13 @@
 
 import { ClerkProvider } from '@clerk/nextjs';
 import { neobrutalism, shadesOfPurple } from '@clerk/themes';
-import { Inter } from 'next/font/google';
+import { Open_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import Navbar from './_components/Navbar';
 import Gradient from './_components/Gradient';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const open_sans = Open_Sans({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'GeoNotes',
@@ -19,7 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={open_sans.className}>
         <ClerkProvider
           appearance={{
             baseTheme: [neobrutalism],

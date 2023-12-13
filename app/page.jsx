@@ -14,7 +14,7 @@ export default async function Home() {
     <>
       <div className="flex flex-row items-start justify-center">
         <p
-          className="font-mono text-black my-0 mx-4 mb-4 bg-green-300 p-2 rounded-lg justify-center max-w-[900px] px-2"
+          className="text-black text-sm my-0 mx-4 mb-4 bg-green-300 p-2 rounded-lg justify-center max-w-[900px] px-2"
         >
           GeoNotes.io is looking for open source contributors 👀 If you are interested in helping build the site,
           visit our <a href="https://github.com/andrewheekin/geonotes.io/issues" className="text-blue-800 underline">GitHub</a>!
