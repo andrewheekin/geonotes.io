@@ -35,7 +35,7 @@ export default async function Navbar() {
             <Typography
               variant="h5"
               component="div"
-              style={{ color: 'black', fontWeight: '500', fontFamily: 'monospace', display: 'flex', flexDirection: 'column' }}
+              style={{ color: 'black', fontWeight: '500', display: 'flex', flexDirection: 'column' }}
             >
               <span style={{ lineHeight: '1.2' }}>GeoNotes</span>
               {/* <span style={{ fontSize: '0.7rem' }}>Learn the world</span> */}
@@ -50,14 +50,10 @@ export default async function Navbar() {
             </IconButton>
           </Link>
           <Link href="/about">
-            <Button style={{ fontFamily: 'monospace', color: 'black' }}>
-              About
-            </Button>
+            <Button style={{ color: 'black' }}>About</Button>
           </Link>
           <Link href="/submit">
-            <Button style={{ fontFamily: 'monospace', letterSpacing: '-0.8px', color: 'black' }}>
-              Submit a GeoNote
-            </Button>
+            <Button style={{ letterSpacing: '-0.8px', color: 'black' }}>Submit a GeoNote</Button>
           </Link>
           {userId ? (
             <div style={{ margin: '0 0 0 10px' }}>
@@ -68,7 +64,7 @@ export default async function Navbar() {
               mode="modal"
               afterSignInUrl="/"
               afterSignUpUrl="/"
-              style={{ fontFamily: 'monospace', fontSize: '0.9rem', letterSpacing: '-0.6px', color: 'black' }}
+              style={{ fontSize: '0.9rem', letterSpacing: '-0.6px', color: 'black' }}
             >
               SIGN IN
             </SignInButton>

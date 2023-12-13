@@ -1,10 +1,8 @@
-// app/page.js
-
 import { Suspense } from 'react';
 import { Typography } from '@mui/material';
 import { unstable_noStore as noStore } from 'next/cache';
 import GeoNotesContainer from './_components/GeoNotesContainer';
-import { supabase } from './SupabaseClient';
+import { supabase } from './_lib/SupabaseClient';
 
 export default async function Home() {
   noStore();

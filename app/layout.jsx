@@ -1,5 +1,3 @@
-// app/layout.js
-
 import { ClerkProvider } from '@clerk/nextjs';
 import { neobrutalism, shadesOfPurple } from '@clerk/themes';
 import { Open_Sans } from 'next/font/google';

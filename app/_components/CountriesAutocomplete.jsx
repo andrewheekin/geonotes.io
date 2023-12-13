@@ -1,16 +1,15 @@
-// app/CountriesAutocomplete.jsx
-"use client";
+'use client';
 
-import React from "react";
-import { Autocomplete, Box, TextField, Chip, Typography } from "@mui/material";
-import CountriesList from "../_lib/CountriesList";
+import React from 'react';
+import { Autocomplete, Box, TextField, Chip, Typography } from '@mui/material';
+import CountriesList from '../_lib/CountriesList';
 
 export default function CountriesAutocomplete({ setSelectedCountries }) {
   return (
     <>
       <Autocomplete
         multiple
-        style={{ fontFamily: "monospace" }}
+        style={{ fontFamily: 'monospace' }}
         fontFamily="monospace"
         options={CountriesList}
         getOptionLabel={(option) => option.label}
@@ -22,7 +21,12 @@ export default function CountriesAutocomplete({ setSelectedCountries }) {
         renderOption={(props, option) => {
           const { key, ...propsNoKey } = { ...props };
           return (
-            <Box key={key} component="li" sx={{ "& > img": { mr: 2, flexShrink: 0 }, fontFamily: 'monospace' }} {...propsNoKey}>
+            <Box
+              key={key}
+              component="li"
+              sx={{ '& > img': { mr: 2, flexShrink: 0 }, fontFamily: 'monospace' }}
+              {...propsNoKey}
+            >
               <img
                 loading="lazy"
                 width="20"
@@ -35,20 +39,31 @@ export default function CountriesAutocomplete({ setSelectedCountries }) {
           );
         }}
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label={<Typography style={{ fontFamily: "monospace", fontSize: '0.9rem' }}>Countries</Typography>} fullWidth />
+          <TextField
+            {...params}
+            variant="outlined"
+            label={<Typography style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>Countries</Typography>}
+            fullWidth
+          />
         )}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => {
             // Get the tag props excluding the key prop
             const { key, ...tagPropsNoKey } = { ...getTagProps({ index }) };
-            return <Chip key={index} label={<Typography style={{ fontFamily: "monospace", fontSize: '0.9rem' }}>{option.label}</Typography>} {...tagPropsNoKey} />;
+            return (
+              <Chip
+                key={index}
+                label={<Typography style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>{option.label}</Typography>}
+                {...tagPropsNoKey}
+              />
+            );
           })
         }
       />
       <Typography
         variant="body2"
         color="text.secondary"
-        style={{ fontSize: "0.7rem", fontFamily: "monospace", color: "grey", margin: "0" }}
+        style={{ fontSize: '0.7rem', fontFamily: 'monospace', color: 'grey', margin: '0' }}
       >
         matches ANY
       </Typography>
