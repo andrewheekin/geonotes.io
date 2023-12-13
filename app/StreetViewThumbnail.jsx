@@ -1,4 +1,4 @@
-// /src/app/StreetViewThumbnail.jsx
+// app/StreetViewThumbnail.jsx
 // I think I can make this a server component... actually no bc it is a child of a client component
 // "use client";
 

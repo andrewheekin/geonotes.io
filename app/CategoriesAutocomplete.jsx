@@ -1,4 +1,4 @@
-// src/app/CategoriesAutocomplete.jsx
+// app/CategoriesAutocomplete.jsx
 'use client';
 
 import React from 'react';

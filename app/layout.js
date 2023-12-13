@@ -1,4 +1,4 @@
-// /src/app/layout.js
+// app/layout.js
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { neobrutalism, shadesOfPurple } from "@clerk/themes";

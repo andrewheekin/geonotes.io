@@ -1,4 +1,4 @@
-// src/app/page.js
+// app/page.js
 
 import { Suspense } from 'react';
 import { Typography } from '@mui/material';
