@@ -1,6 +1,6 @@
 <div align="center">
   <h1 align="center">GeoNotes.io</h1>
-  <h3>GeoNotes.io is the open source platform for community-contributed<br />Street View notes to sharpen your GeoGuessr game</h3>
+  <h3>GeoNotes.io is the open source platform for community-contributed<br />Street View notes for GeoGuessr</h3>
 </div>
 
 <div align="center">
@@ -16,14 +16,16 @@
 
 <br/>
 
-GeoNotes.io is the open source platform for community-contributed Street View notes to sharpen your GeoGuessr game. Built with Next.js on [Vercel](http://vercel.com/) and [Supabase](https://supabase.com/).
+GeoNotes.io is the open source platform for community-contributed Street View notes. Built with Next.js on [Vercel](http://vercel.com/) and [Supabase](https://supabase.com/).
 
 ## Demo
 <div align="center">
+  <p>Home page</p>
   <img src="https://github.com/andrewheekin/geonotes.io/assets/4684591/9c112c93-6f14-46fb-b5e1-d0144fbf6668">
 </div>
 <br />
 <div align="center">
+  <p>With cateogry filter</p>
   <img src="https://github.com/andrewheekin/geonotes.io/assets/4684591/178a0a9c-7717-4a1b-bd20-3f7a1db8a163">
 </div>
 
