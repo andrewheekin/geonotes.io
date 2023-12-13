@@ -3,7 +3,7 @@
 
 import React from "react";
 import { Autocomplete, Box, TextField, Chip, Typography } from "@mui/material";
-import CountriesList from "./CountriesList";
+import CountriesList from "../_lib/CountriesList";
 
 export default function CountriesAutocomplete({ setSelectedCountries }) {
   return (

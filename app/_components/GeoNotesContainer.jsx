@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Avatar, Typography, Container, Card, Chip, CardContent, CircularProgress } from "@mui/material";
-import { getCountryCode } from "./CountriesList";
+import { getCountryCode } from "../_lib/CountriesList";
 import StreetViewThumbnail from "./StreetViewThumbnail";
 import CountriesAutocomplete from "./CountriesAutocomplete";
 import CategoriesAutocomplete from "./CategoriesAutocomplete";

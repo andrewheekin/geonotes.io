@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { Autocomplete, Box, TextField, Chip, Typography } from '@mui/material';
-import CategoriesList from './CategoriesList';
+import CategoriesList from '../_lib/CategoriesList';
 
 export default function CategoriesAutocomplete({ setSelectedCategories }) {
   return (
