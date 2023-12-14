@@ -3,8 +3,11 @@ export default function About() {
     <div className="max-w-screen-md mx-auto">
       <h1 className="text-2xl font-bold text-black">About GeoNotes.io</h1>
       <p className="text-lg text-black my-4 bg-green-200 p-4 rounded-md">
-        GeoNotes.io was created by <a href="https://www.geoguessr.com/user/5f0524fe657099387000f26e" className="underline">@geoheek</a> to
-        help share tips about Google Street View clues from around the 🌎 (Note, GeoNotes is not affiliated with
+        GeoNotes.io was created by{' '}
+        <a href="https://www.geoguessr.com/user/5f0524fe657099387000f26e" className="underline">
+          @geoheek
+        </a>{' '}
+        to help share tips about Google Street View clues from around the 🌎 (Note, GeoNotes is not affiliated with
         GeoGuessr)
       </p>
       <p className="text-md text-black my-4 bg-gray-300 p-4 rounded-md">

@@ -1,4 +1,4 @@
-import { ClerkProvider } from '@clerk/nextjs';
+import { auth, currentUser, ClerkProvider } from '@clerk/nextjs';
 import { neobrutalism, shadesOfPurple } from '@clerk/themes';
 import { Open_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
@@ -14,7 +14,13 @@ export const metadata = {
   icons: [{ url: '/favicon.ico', href: '/favicon.ico' }],
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  /**
+   * Clerk.com Auth-related Code
+   */
+  const { userId } = auth();
+  const user = await currentUser();
+
   return (
     <html lang="en">
       <body className={open_sans.className}>
@@ -27,7 +33,7 @@ export default function RootLayout({ children }) {
             },
           }}
         >
-          <Navbar />
+          <Navbar userId={userId} />
           <main
             className="d-flex mh-100vh min-h-screen flex-column align-items-start py-4"
             // min-h-screen is minimum height of the viewport

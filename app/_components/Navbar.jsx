@@ -1,76 +1,84 @@
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
-import { UserButton, auth, currentUser, SignInButton } from '@clerk/nextjs';
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { UserButton, SignInButton } from '@clerk/nextjs';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-export default async function Navbar() {
-  /**
-   * Clerk.com Auth-related Code
-   */
-  // Get the userId from auth() -- if null, the user is not logged in
-  const { userId } = auth();
-
-  if (userId) {
-    // Query DB for user specific information or display assets only to logged in users
-  }
-
-  // Get the User object when you need access to the user's information
-  const user = await currentUser();
-  // Use `user` to render user details or create UI element
+export default function Navbar({ userId }) {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <AppBar position="static" style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
-      <Toolbar style={{ justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-          <Image
-            src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif"
-            alt="Globe"
-            width={40}
-            height={40}
-            unoptimized
-            style={{ margin: '0 8px 0 0' }}
-          />
-          <Link href="/">
-            <Typography
-              variant="h5"
-              component="div"
-              style={{ color: 'black', fontWeight: '500', display: 'flex', flexDirection: 'column' }}
+    <nav className="bg-transparent shadow-none container mx-auto flex flex-wrap items-center justify-between px-4 py-2">
+      <div className="flex items-center">
+        <Image
+          src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif"
+          alt="Globe"
+          width={40}
+          height={40}
+          unoptimized
+          className="mr-2"
+        />
+        <Link href="/" className="text-black text-lg font-semibold flex flex-col leading-tight">
+          {/* TODO make this font bigger, tailwind not behaving */}
+          GeoNotes
+        </Link>
+      </div>
+      <div className="md:hidden">
+        <button onClick={() => setIsOpen(!isOpen)}>
+          {/* Hamburger Icon */}
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+      <div className={`w-full md:flex md:items-center md:w-auto ${isOpen ? 'block' : 'hidden'}`}>
+        <ul className='pt-4 md:flex md:justify-between md:pt-0"'>
+          <li>
+            <Link
+              href="https://github.com/andrewheekin/geonotes.io"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500"
             >
-              <span style={{ lineHeight: '1.2' }}>GeoNotes</span>
-              {/* <span style={{ fontSize: '0.7rem' }}>Learn the world</span> */}
-              {/* <span style={{ fontSize: "0.7rem" }}>Launched Nov 2023 🎉</span> */}
-            </Typography>
-          </Link>
-        </div>
-        <div style={{ display: 'flex' }}>
-          <Link href="https://github.com/andrewheekin/geonotes.io">
-            <IconButton sx={{ color: 'black', '&:hover': { color: 'lightgray' } }}>
               <GitHubIcon />
-            </IconButton>
-          </Link>
-          <Link href="/about">
-            <Button style={{ color: 'black' }}>About</Button>
-          </Link>
-          <Link href="/submit">
-            <Button style={{ letterSpacing: '-0.8px', color: 'black' }}>Submit a GeoNote</Button>
-          </Link>
-          {userId ? (
-            <div style={{ margin: '0 0 0 10px' }}>
-              <UserButton afterSignOutUrl="/" />
-            </div>
-          ) : (
-            <SignInButton
-              mode="modal"
-              afterSignInUrl="/"
-              afterSignUpUrl="/"
-              style={{ fontSize: '0.9rem', letterSpacing: '-0.6px', color: 'black' }}
-            >
-              SIGN IN
-            </SignInButton>
-          )}
-        </div>
-      </Toolbar>
-    </AppBar>
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link href="/submit" className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">
+              Add GeoNote
+            </Link>
+          </li>
+          <li>
+            {userId ? (
+              <div className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">
+                <UserButton afterSignOutUrl="/" />
+              </div>
+            ) : (
+              <SignInButton
+                mode="modal"
+                afterSignInUrl="/"
+                afterSignUpUrl="/"
+                className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-black px-2"
+              >
+                Sign In
+              </SignInButton>
+            )}
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 }
