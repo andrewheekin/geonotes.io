@@ -6,7 +6,7 @@ import { supabase } from './_lib/SupabaseClient';
 
 export default async function Home() {
   noStore();
-  const { data: geoNotes } = await supabase.from('geonote').select('*');
+  const { data: geoNotes } = await supabase.from('geonote').select('*').limit(20);
 
   return (
     <>
