@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { UserButton, SignInButton } from '@clerk/nextjs';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 export default function Navbar({ userId }) {
@@ -62,20 +61,7 @@ export default function Navbar({ userId }) {
             </Link>
           </li>
           <li>
-            {userId ? (
-              <div className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">
-                <UserButton afterSignOutUrl="/" />
-              </div>
-            ) : (
-              <SignInButton
-                mode="modal"
-                afterSignInUrl="/"
-                afterSignUpUrl="/"
-                className="block mt-4 md:inline-block md:mt-0 md:ml-6 text-black px-2"
-              >
-                Sign In
-              </SignInButton>
-            )}
+            {userId && <div className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">{userId}</div>}
           </li>
         </ul>
       </div>

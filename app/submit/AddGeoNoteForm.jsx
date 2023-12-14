@@ -6,9 +6,12 @@ import { createGeoNote } from '../_lib/actions';
 import categories from '../_lib/CategoriesList';
 import countries from '../_lib/CountriesList';
 
+const initialState = { message: null, errors: {} };
+
 export default function AddGeoNoteForm() {
-  const initialState = { message: null, errors: {} };
-  const [state, dispatch] = useFormState(createGeoNote, initialState);
+  console.log('AddGeoNoteForm rendered')
+  console.log('initialState AddGeoNoteForm', initialState)
+  const [state, formAction] = useFormState(createGeoNote, initialState);
 
   /**
    * TODO: (numbered in order of how form fields appear on UI)
@@ -24,7 +27,7 @@ export default function AddGeoNoteForm() {
    */
 
   return (
-    <form onSubmit={dispatch}>
+    <form action={formAction}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Title */}
         <div className="mb-4">
@@ -134,7 +137,7 @@ export default function AddGeoNoteForm() {
           Cancel
         </Link>
         <button
-          type="submit"
+          // type="submit"
           className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
         >
           Add GeoNote

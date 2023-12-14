@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { Typography } from '@mui/material';
 import { unstable_noStore as noStore } from 'next/cache';
 import GeoNotesContainer from './_components/GeoNotesContainer';
 import { supabase } from './_lib/SupabaseClient';
