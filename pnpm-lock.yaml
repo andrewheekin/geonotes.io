@@ -40,6 +40,9 @@ dependencies:
     version: 18.2.0(react@18.2.0)
 
 devDependencies:
+  '@next/eslint-plugin-next':
+    specifier: ^14.0.4
+    version: 14.0.4
   autoprefixer:
     specifier: ^10.0.1
     version: 10.4.16(postcss@8.4.32)
@@ -633,6 +636,12 @@ packages:
 
   /@next/eslint-plugin-next@14.0.1:
     resolution: {integrity: sha512-bLjJMwXdzvhnQOnxvHoTTUh/+PYk6FF/DCgHi4BXwXCINer+o1ZYfL9aVeezj/oI7wqGJOqwGIXrlBvPbAId3w==}
+    dependencies:
+      glob: 7.1.7
+    dev: true
+
+  /@next/eslint-plugin-next@14.0.4:
+    resolution: {integrity: sha512-U3qMNHmEZoVmHA0j/57nRfi3AscXNvkOnxDmle/69Jz/G0o/gWjXTDdlgILZdrxQ0Lw/jv2mPW8PGy0EGIHXhQ==}
     dependencies:
       glob: 7.1.7
     dev: true
