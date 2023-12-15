@@ -46,6 +46,30 @@ supabase db pull
 
 Guide to [Supabase Database migrations](https://supabase.com/docs/guides/cli/local-development#database-migrations) 
 
+#### Sync the remote database schema to local project
+```
+# Capture any changes that you have made to your remote database
+supabase db pull
+
+# To apply the new migration to your local database:
+supabase migration up
+```
+
+#### Create a local database migration
+```
+supabase migration new your_migration_name
+```
+
+#### Deploy any local database migrations
+```
+# To apply the new migration to your local database:
+supabase db reset
+
+# To apply the new migration to your remote database:
+supabase db push
+```
+
+
 ## Google Street View and Maps Notes
 
 ### [Street View Static API Docs](https://developers.google.com/maps/documentation/streetview/request-streetview)
