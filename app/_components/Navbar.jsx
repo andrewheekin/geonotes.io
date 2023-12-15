@@ -61,7 +61,13 @@ export default function Navbar({ userId }) {
             </Link>
           </li>
           <li>
-            {userId && <div className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">{userId}</div>}
+            {userId ? (
+              <div className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">{userId}</div>
+            ) : (
+              <Link href="/login" className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">
+                Login
+              </Link>
+            )}
           </li>
         </ul>
       </div>

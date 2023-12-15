@@ -16,7 +16,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={open_sans.className}>
-        <Navbar userId={'abc'} />
+        <Navbar userId={''} />
         <main
           className="d-flex mh-100vh min-h-screen flex-column align-items-start py-4"
           // min-h-screen is minimum height of the viewport
