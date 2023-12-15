@@ -43,6 +43,9 @@ supabase link --project-ref <project-id>
 # You can get <project-id> from your project's dashboard URL: https://supabase.com/dashboard/project/<project-id>
 supabase db pull
 ```
+
+Guide to [Supabase Database migrations](https://supabase.com/docs/guides/cli/local-development#database-migrations) 
+
 ## Google Street View and Maps Notes
 
 ### [Street View Static API Docs](https://developers.google.com/maps/documentation/streetview/request-streetview)
