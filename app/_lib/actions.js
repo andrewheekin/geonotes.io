@@ -6,9 +6,8 @@ import { unstable_noStore as noStore } from 'next/cache';
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
-// const cookieStore = cookies();
-// const supabase = createServerActionClient({ cookies: () => cookieStore });
-const supabase = {};
+const cookieStore = cookies();
+const supabase = createServerActionClient({ cookies: () => cookieStore });
 
 export async function fetchGeoNotes() {
   noStore();
