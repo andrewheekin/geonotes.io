@@ -13,7 +13,7 @@ export default function AuthForm() {
       appearance={{ theme: ThemeSupa }}
       showLinks={false}
       providers={[]}
-      redirectTo="http://localhost:3000/auth/callback"
+      redirectTo={`${process.env.NEXT_PUBLIC_API}/auth/callback`}
     />
   )
 }
