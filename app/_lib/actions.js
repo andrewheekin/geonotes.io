@@ -12,9 +12,7 @@ export async function fetchGeoNotes() {
   const cookieStore = cookies();
   const supabase = createServerActionClient({ cookies: () => cookieStore });
 
-  // const { data, error } = await supabase.from('geonote').select('*'); //.limit(20);
-  const data = {};
-  const error = '';
+  const { data, error } = await supabase.from('geonote').select('*'); //.limit(20);
 
   if (error) {
     console.error('Database Error: ', error);
