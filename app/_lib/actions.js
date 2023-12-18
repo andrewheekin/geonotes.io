@@ -1,5 +1,3 @@
-'use server';
-
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { unstable_noStore as noStore } from 'next/cache';
@@ -26,15 +24,14 @@ export async function fetchGeoNotes() {
 
 export async function createGeoNote(prevState, formData) {
   noStore();
-  
+
   const cookieStore = cookies();
   const supabase = createServerActionClient({ cookies: () => cookieStore });
-  // const {
-  //   data: {
-  //     user: { email },
-  //   },
-  // } = await supabase.auth.getUser();
-  const email = 'abc';
+  const {
+    data: {
+      user: { email },
+    },
+  } = await supabase.auth.getUser();
 
   const { title, description, categories, country, region, author, streetviewurl, created_at } = {
     title: formData.get('title'),
