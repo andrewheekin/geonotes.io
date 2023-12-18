@@ -25,6 +25,10 @@ export async function fetchGeoNotes() {
 }
 
 export async function createGeoNote(prevState, formData) {
+  noStore();
+  
+  const cookieStore = cookies();
+  const supabase = createServerActionClient({ cookies: () => cookieStore });
   // const {
   //   data: {
   //     user: { email },
