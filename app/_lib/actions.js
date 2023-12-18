@@ -15,6 +15,7 @@ export async function fetchGeoNotes() {
 
   // const { data, error } = await supabase.from('geonote').select('*'); //.limit(20);
   const data = {};
+  const error = '';
 
   if (error) {
     console.error('Database Error: ', error);
