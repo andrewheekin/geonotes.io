@@ -9,7 +9,7 @@ export default async function GeoNotesList() {
   const geoNotes = await fetchGeoNotes();
 
   return (
-    <div className="mx-auto max-w-[900px]">
+    <div className="m-4 mx-auto max-w-[900px]">
       {geoNotes && geoNotes.length > 0 ? (
         geoNotes.map((note, index) => (
           <div key={index} className="mb-4 border-4 border-black bg-gray-200 relative shadow rounded">
