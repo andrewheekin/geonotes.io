@@ -1,4 +1,3 @@
-import React from 'react';
 import Select from 'react-select';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import CountriesList from '../_lib/CountriesList';
@@ -35,7 +34,6 @@ export default function GeoNoteSearch() {
   const { replace } = useRouter();
 
   const handleChange = (selectedOptions) => {
-    console.log('selectedOptions', selectedOptions);
 
     // Split selected options by type
     const selectedCountries = selectedOptions.filter((option) => option.type === 'country');
@@ -55,7 +53,6 @@ export default function GeoNoteSearch() {
     params.set('regions', regionValues.join(','));
 
     const newParams = `${pathname}?${params.toString()}`;
-    console.log('newParams', newParams)
     replace(newParams);
   };
 

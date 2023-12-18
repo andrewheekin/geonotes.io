@@ -69,8 +69,8 @@ export default function AddGeoNoteForm() {
             className="w-full rounded-md border border-gray-200 p-2 text-sm"
           >
             {categories.map((category, idx) => (
-              <option key={idx} value={category}>
-                {category}
+              <option key={idx} value={category.value}>
+                {category.label}
               </option>
             ))}
           </select>

@@ -5,8 +5,8 @@ import { getCountryCode } from '../_lib/CountriesList';
 import StreetViewThumbnail from './StreetViewThumbnail';
 import { fetchGeoNotes } from '../_lib/actions';
 
-export default async function GeoNotesList() {
-  const geoNotes = await fetchGeoNotes();
+export default async function GeoNotesList({ searchParams }) {
+  const geoNotes = await fetchGeoNotes({ searchParams });
 
   return (
     <div className="max-w-5xl w-full">

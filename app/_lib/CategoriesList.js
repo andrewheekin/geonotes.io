@@ -1,7 +1,7 @@
 export default [
   { label: 'Bollards', value: 'Bollards' },
   { label: 'Architecture', value: 'Architecture' },
-  { label: 'Cars, Trucks (Non-Google)', value: 'Cars, Trucks (Non-Google)' },
+  { label: 'Vehicles (Non-Google)', value: 'Vehicles (Non-Google)' },
   { label: 'Google Cars', value: 'Google Cars' },
   { label: 'Utility Poles', value: 'Utility Poles' },
   { label: 'Flags', value: 'Flags' },
