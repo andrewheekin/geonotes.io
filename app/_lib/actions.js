@@ -54,7 +54,7 @@ export async function createGeoNote(prevState, formData) {
   const lng = streetviewurl.match(/@-?\d+\.\d+,(-?\d+\.\d+)/)[1];
   const heading = streetviewurl.match(/,(\d+\.?\d*)h,/)[1];
   const zoom = streetviewurl.match(/,(\d+\.?\d*)y,/)[1];
-  const pitch = streetviewurl.match(/,(\d+\.?\d*)t/)[1];
+  const pitch = parseFloat(streetviewurl.match(/,(\d+\.?\d*)t/)[1]) - 90.0;
 
   console.log('lat: ' + lat);
   console.log('lng: ' + lng);
