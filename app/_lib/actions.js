@@ -13,7 +13,8 @@ const supabase = {};
 export async function fetchGeoNotes() {
   noStore();
 
-  const { data, error } = await supabase.from('geonote').select('*'); //.limit(20);
+  // const { data, error } = await supabase.from('geonote').select('*'); //.limit(20);
+  const data = {};
 
   if (error) {
     console.error('Database Error: ', error);
@@ -26,11 +27,12 @@ export async function fetchGeoNotes() {
 }
 
 export async function createGeoNote(prevState, formData) {
-  const {
-    data: {
-      user: { email },
-    },
-  } = await supabase.auth.getUser();
+  // const {
+  //   data: {
+  //     user: { email },
+  //   },
+  // } = await supabase.auth.getUser();
+  const email = 'abc'
 
   const { title, description, categories, country, region, author, streetviewurl, created_at } = {
     title: formData.get('title'),
