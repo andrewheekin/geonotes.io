@@ -9,10 +9,11 @@ import { cookies } from 'next/headers';
 
 export async function getUserSession() {
   try {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    return session;
+    // const {
+    //   data: { session },
+    // } = await supabase.auth.getSession();
+    // return session;
+    return {};
   } catch (error) {
     console.error('Database Error: ', error);
     return {

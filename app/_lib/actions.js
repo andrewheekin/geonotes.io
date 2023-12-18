@@ -8,6 +8,7 @@ import { cookies } from 'next/headers';
 
 // const cookieStore = cookies();
 // const supabase = createServerActionClient({ cookies: () => cookieStore });
+const supabase = {};
 
 export async function fetchGeoNotes() {
   noStore();
