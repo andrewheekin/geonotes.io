@@ -78,13 +78,10 @@ export default async function GeoNotesList({ searchParams }) {
           </div>
         ))
       ) : (
-        <Typography
-          variant="h6"
-          component="div"
-          style={{ fontFamily: 'monospace', color: 'black', textAlign: 'center', marginTop: '2rem' }}
-        >
-          No GeoNotes yet for this search :(
-        </Typography>
+        <div className="text-center">
+          <p className="text-xl text-black font-semibold tracking-tighter">No GeoNotes yet for this search</p>
+          <p className="text-xl text-black font-normal tracking-tight"> :(</p>
+        </div>
       )}
     </div>
   );
