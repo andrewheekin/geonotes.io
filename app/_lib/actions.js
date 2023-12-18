@@ -15,7 +15,7 @@ export async function fetchGeoNotes({ searchParams }) {
    * If searchParams is empty, return all the GeoNotes
    *
    * Otherwise, return the GeoNotes that match the searchParams
-   * Example searchParams: 
+   * Example searchParams:
    * {
    *   countries: 'Albania,Bhutan,United States',
    *   categories: 'Cars, Trucks (Non-Google)',
@@ -26,14 +26,11 @@ export async function fetchGeoNotes({ searchParams }) {
   const cookieStore = cookies();
   const supabase = createServerActionClient({ cookies: () => cookieStore });
 
-  if (searchParams.hasOwnProperty('countries') && searchParams.countries.length > 0) {
+  if (Object.prototype.hasOwnProperty.call(searchParams, 'countries') && searchParams.countries.length > 0) {
     const countries = searchParams.countries.split(',');
-    console.log('countries', countries)
+    console.log('countries', countries);
 
-    const { data, error } = await supabase
-      .from('geonote')
-      .select('*')
-      .in('country', countries)
+    const { data, error } = await supabase.from('geonote').select('*').in('country', countries);
 
     if (error) {
       console.error('Database Error: ', error);
@@ -44,7 +41,6 @@ export async function fetchGeoNotes({ searchParams }) {
 
     return data;
   }
-
 
   const { data, error } = await supabase.from('geonote').select('*').limit(20);
 
