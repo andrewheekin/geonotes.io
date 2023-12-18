@@ -6,11 +6,11 @@ import { unstable_noStore as noStore } from 'next/cache';
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
-const cookieStore = cookies();
-const supabase = createServerActionClient({ cookies: () => cookieStore });
-
 export async function fetchGeoNotes() {
   noStore();
+
+  const cookieStore = cookies();
+  const supabase = createServerActionClient({ cookies: () => cookieStore });
 
   // const { data, error } = await supabase.from('geonote').select('*'); //.limit(20);
   const data = {};
@@ -32,7 +32,7 @@ export async function createGeoNote(prevState, formData) {
   //     user: { email },
   //   },
   // } = await supabase.auth.getUser();
-  const email = 'abc'
+  const email = 'abc';
 
   const { title, description, categories, country, region, author, streetviewurl, created_at } = {
     title: formData.get('title'),
