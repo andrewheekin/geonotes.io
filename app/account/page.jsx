@@ -1,14 +1,8 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { getUserSession } from '../_lib/server-data';
 import AccountForm from './AccountForm';
 
 export default async function Account() {
-  const cookieStore = cookies();
-  const supabase = createServerComponentClient({ cookies: () => cookieStore });
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const session = await getUserSession();
 
   return (
     <div className="max-w-screen-md mx-auto">

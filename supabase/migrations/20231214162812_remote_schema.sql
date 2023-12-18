@@ -35,19 +35,31 @@ DECLARE
   zoom_value TEXT;
   pitch_value TEXT;
 BEGIN
-  -- Use regex to extract the values
-  lat_value := substring(NEW.streetviewurl FROM '@(-?\d+\.\d+),');
-  lng_value := substring(NEW.streetviewurl FROM '@-?\d+\.\d+,(-?\d+\.\d+)');
-  heading_value := substring(NEW.streetviewurl FROM ',(\d+\.?\d*)h,');
-  zoom_value := substring(NEW.streetviewurl FROM ',(\d+\.?\d*)y,');
-  pitch_value := substring(NEW.streetviewurl FROM ',(\d+\.?\d*)t');
+  -- -- OLD Use regex to extract the values
+  -- lat_value := substring(NEW.streetviewurl FROM '@(-?\d+\.\d+),');
+  -- lng_value := substring(NEW.streetviewurl FROM '@-?\d+\.\d+,(-?\d+\.\d+)');
+  -- heading_value := substring(NEW.streetviewurl FROM ',(\d+\.?\d*)h,');
+  -- zoom_value := substring(NEW.streetviewurl FROM ',(\d+\.?\d*)y,');
+  -- pitch_value := substring(NEW.streetviewurl FROM ',(\d+\.?\d*)t');
   
-  -- Update the new row with the extracted values
-  NEW.lat := lat_value;
-  NEW.lng := lng_value;
-  NEW.heading := heading_value;
-  NEW.zoom := zoom_value;
-  NEW.pitch := pitch_value;
+  -- -- OLD Update the new row with the extracted values
+  -- NEW.lat := lat_value;
+  -- NEW.lng := lng_value;
+  -- NEW.heading := heading_value;
+  -- NEW.zoom := zoom_value;
+  -- NEW.pitch := pitch_value;
+
+  -- Example regex to parse the streetviewurl (this will depend on your specific URL format)
+  SELECT (regexp_matches(NEW.streetviewurl, '@(-?\d+\.\d+),'))[1] INTO lat_value;
+  SELECT (regexp_matches(NEW.streetviewurl, '@-?\d+\.\d+,(-?\d+\.\d+)'))[1] INTO lng_value;
+  SELECT (regexp_matches(NEW.streetviewurl, ',(\d+\.?\d*)h,'))[1] INTO heading_value;
+  SELECT (regexp_matches(NEW.streetviewurl, ',(\d+\.?\d*)y,'))[1] INTO zoom_value;
+  SELECT (regexp_matches(NEW.streetviewurl, ',(\d+\.?\d*)t'))[1] INTO pitch_value;
+
+  -- Update the new record with the parsed values
+  UPDATE "public"."geonote"
+  SET "lat" = lat_value, "lng" = lng_value, "heading" = heading_value, "zoom" = zoom_value, "pitch" = pitch_value
+  WHERE id = NEW.id;
   
   -- Return the updated row
   RETURN NEW;

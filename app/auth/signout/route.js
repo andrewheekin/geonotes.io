@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 export async function GET(req) {
+  console.log('In GET /auth/signout, Signing out...')
   const cookieStore = cookies()
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore })
 
@@ -12,6 +13,7 @@ export async function GET(req) {
   } = await supabase.auth.getSession()
 
   if (session) {
+    console.log('Session found, signing out...')
     await supabase.auth.signOut()
   }
 

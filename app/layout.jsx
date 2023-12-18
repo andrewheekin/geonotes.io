@@ -1,5 +1,7 @@
 import { Open_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import { Toaster } from "sonner";
+import { getUserSession } from './_lib/server-data';
 import Navbar from './_components/Navbar';
 import Gradient from './_components/Gradient';
 import './globals.css';
@@ -13,18 +15,16 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const userSession = await getUserSession();
+  const user = userSession?.user;
+
   return (
     <html lang="en">
       <body className={open_sans.className}>
-        <Navbar userId={''} />
-        <main
-          className="d-flex mh-100vh min-h-screen flex-column align-items-start py-4"
-          // min-h-screen is minimum height of the viewport
-          // py-4 is padding on the top and bottom
-          // align-items-start is aligning the content to the top
-        >
+        <Navbar user={user} />
+        <main className="d-flex mh-100vh min-h-screen flex-column align-items-start py-4">
+          <Toaster closeButton richColors theme={"system"} />
           <Gradient />
-
           {children}
         </main>
         <Analytics />

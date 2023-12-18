@@ -11,7 +11,6 @@ export default function AuthForm() {
       supabaseClient={supabase}
       view="magic_link"
       appearance={{ theme: ThemeSupa }}
-      theme="dark"
       showLinks={false}
       providers={[]}
       redirectTo="http://localhost:3000/auth/callback"

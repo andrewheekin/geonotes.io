@@ -4,24 +4,17 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { toast } from 'sonner';
 
-export default function Navbar({ userId }) {
+export default function Navbar({ user }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="bg-transparent shadow-none container mx-auto flex flex-wrap items-center justify-between px-4 py-2">
-      <div className="flex items-center">
-        <Image
-          src="https://media.tenor.com/dhfraztxBo8AAAAj/globe-joypixels.gif"
-          alt="Globe"
-          width={40}
-          height={40}
-          unoptimized
-          className="mr-2"
-        />
-        <Link href="/" className="text-black text-lg font-semibold flex flex-col leading-tight">
-          {/* TODO make this font bigger, tailwind not behaving */}
-          GeoNotes
+      <div className="flex items-end">
+        <Image src="globe.png" alt="Globe" width={30} height={30} unoptimized className="mr-2" />
+        <Link href="/" className="flex flex-col">
+          <div className="text-2xl text-black font-bold tracking-tighter">GeoNotes</div>
         </Link>
       </div>
       <div className="md:hidden">
@@ -34,14 +27,14 @@ export default function Navbar({ userId }) {
             strokeLinejoin="round"
             strokeWidth="2"
             viewBox="0 0 24 24"
-            stroke="currentColor"
+            stroke="black"
           >
             <path d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
       </div>
       <div className={`w-full md:flex md:items-center md:w-auto ${isOpen ? 'block' : 'hidden'}`}>
-        <ul className='pt-4 md:flex md:justify-between md:pt-0"'>
+        <ul className="pt-4 md:flex md:justify-between md:pt-0 font-semibold tracking-tight">
           <li>
             <Link
               href="https://github.com/andrewheekin/geonotes.io"
@@ -51,24 +44,40 @@ export default function Navbar({ userId }) {
             </Link>
           </li>
           <li>
-            <Link href="/about" className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">
+            <Link href="/about" className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 px-2">
               About
             </Link>
           </li>
-          <li>
-            <Link href="/submit" className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">
-              Add GeoNote
-            </Link>
-          </li>
-          <li>
-            {userId ? (
-              <div className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">{userId}</div>
-            ) : (
-              <Link href="/login" className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black px-2">
-                Login
-              </Link>
-            )}
-          </li>
+          {user ? (
+            <>
+              <li>
+                <Link href="/submit" className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 px-2">
+                  Add GeoNote
+                </Link>
+              </li>
+              <li>
+                <Link href="/account" className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2">
+                  <div className="text-black hover:text-gray-500">Account</div>
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <div
+                  onClick={() => toast('Login to add GeoNotes!')}
+                  className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 px-2 cursor-pointer"
+                >
+                  Add GeoNote
+                </div>
+              </li>
+              <li>
+                <Link href="/login" className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2">
+                  <div className="text-black hover:text-gray-500">Login</div>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>

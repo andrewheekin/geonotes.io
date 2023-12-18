@@ -1,81 +1,86 @@
+'use server';
+
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { unstable_noStore as noStore } from 'next/cache';
+import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+const supabase = createServerActionClient({ cookies });
 
-import { supabase } from './SupabaseClient';
+export async function fetchGeoNotes() {
+  noStore();
+
+  const { data, error } = await supabase.from('geonote').select('*').limit(20);
+
+  if (error) {
+    console.error('Database Error: ', error);
+    return {
+      message: 'Database Error: Failed to Fetch GeoNotes.',
+    };
+  }
+
+  return data;
+}
 
 export async function createGeoNote(prevState, formData) {
-  console.log('formData: ', formData);
-  console.log('prevState: ', prevState);
+  const {
+    data: {
+      user: { email },
+    },
+  } = await supabase.auth.getUser();
 
-  // Extract form data
-  // const { title, description, categories, country, region, author, streetViewLink } = formData;
+  const { title, description, categories, country, region, author, streetviewurl, created_at } = {
+    title: formData.get('title'),
+    description: formData.get('description'),
+    categories: formData.getAll('categories'),
+    country: formData.get('country'),
+    region: formData.getAll('region'),
+    streetviewurl: formData.get('streetViewLink'),
+    created_at: new Date(),
+    author: email,
+  };
 
-  console.log('formData: ', formData);
+  /**
+   * Parse out the Street View URL
+   */
+
+  const lat = streetviewurl.match(/@(-?\d+\.\d+),/)[1];
+  const lng = streetviewurl.match(/@-?\d+\.\d+,(-?\d+\.\d+)/)[1];
+  const heading = streetviewurl.match(/,(\d+\.?\d*)h,/)[1];
+  const zoom = streetviewurl.match(/,(\d+\.?\d*)y,/)[1];
+  const pitch = streetviewurl.match(/,(\d+\.?\d*)t/)[1];
+
+  console.log("lat: " + lat);
+  console.log("lng: " + lng);
+  console.log("heading: " + heading);
+  console.log("zoom: " + zoom);
+  console.log("pitch: " + pitch);
+  
 
   try {
-    // Insert new GeoNote into database
-    // Here's a sample SQL insert:
-    /*
-insert into
-public.geonote (  title,  description,  categories,  created_at,  author,  country,  streetviewurl,  imageurl,  lat,  lng,
-  heading,  zoom,  pitch, region )
-values
-(
-  'Sample Title',
-  'Sample Description',
-  array['Category1', 'Category2'],
-  now(),
-  'John Doe',
-  'USA',
-  'https://samplestreetviewurl.com',
-  'https://sampleimageurl.com',
-  37.7749,
-  -122.4194,
-  90.0,
-  10.0,
-  0.0,
-  array['Region1', 'Region2']
-);
-*/
-    supabase
-      .from('geonote')
-      .insert([
-        {
-          title: 'Sample Title',
-          description: 'Sample Description',
-          categories: ['Category1', 'Category2'],
-          created_at: new Date(),
-          author: 'John Doe',
-          country: 'USA',
-          streetviewurl: 'https://samplestreetviewurl.com',
-          imageurl: 'https://sampleimageurl.com',
-          lat: 37.7749,
-          lng: -122.4194,
-          heading: 90.0,
-          zoom: 10.0,
-          pitch: 0.0,
-          region: ['Region1', 'Region2'],
-        },
-      ])
-      .then(({ data, error }) => {
-        if (error) {
-          console.log('error: ', error);
-          throw error;
-        }
-        console.log('data: ', data);
-      });
+    await supabase.from('geonote').insert([
+      {
+        title,
+        description,
+        categories,
+        created_at,
+        author,
+        country,
+        streetviewurl,
+        region,
+        lat,
+        lng,
+        heading,
+        zoom,
+        pitch,
+      },
+    ]);
 
-    // Assuming you have a SQL query function set up (like 'sql' from 'postgres')
-    // Update the query according to your database schema
-    // await sql`INSERT INTO geonotes (title, description, categories, country, region, author, streetViewLink)
-    // VALUES (${title}, ${description}, ${categories}, ${country}, ${region}, ${author}, ${streetViewLink})`;
+    console.log('GeoNote created successfully!');
 
     // If the database operation is successful, revalidate and redirect
-    // revalidatePath("/");
-    // redirect("/"); // Update the redirect path as needed
-    return {
-      message: 'Success: GeoNote Created.',
-    };
+    // revalidatePath("/account");
+    // redirect("/account");
   } catch (error) {
     console.error('Database Error: ', error);
     return {
