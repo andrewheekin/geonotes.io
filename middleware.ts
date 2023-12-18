@@ -1,7 +1,20 @@
 import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function middleware(req) {
+/**
+ * Next.js middleware
+ * 
+ * @param req
+ * @returns 
+ * 
+ * https://nextjs.org/docs/app/building-your-application/routing/middleware
+ * Middleware allows you to run code before a request is completed. Then, based on the incoming request,
+ * you can modify the response by rewriting, redirecting, modifying the request or response headers,
+ * or responding directly.
+ * 
+ */
+
+export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req, res });
 

@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Container, CircularProgress } from '@mui/material';
 import CountriesAutocomplete from './CountriesAutocomplete';
 import CategoriesAutocomplete from './CategoriesAutocomplete';
 import RegionSpecificToggle from './RegionSpecificToggle';
+import GeoNoteSearch from './GeoNoteSearch';
 
 export default function GeoNotesContainer() {
   const [filteredGeoNotes, setFilteredGeoNotes] = useState([]);
@@ -36,7 +36,7 @@ export default function GeoNotesContainer() {
   // }
 
   return (
-    <div className="m-4 mx-auto max-w-[900px]">
+    <div className="max-w-5xl w-full">
       <div className="flex flex-col sm:flex-row gap-3 w-full">
         <div className="flex-grow w-full">
           <CountriesAutocomplete setSelectedCountries={setSelectedCountries} />
@@ -44,6 +44,9 @@ export default function GeoNotesContainer() {
         <div className="flex-grow w-full">
           <CategoriesAutocomplete setSelectedCategories={setSelectedCategories} />
         </div>
+      </div>
+      <div className="flex flex-row mb-4 mt-2 w-full">
+        <GeoNoteSearch />
       </div>
       <div className="flex flex-row mb-4 mt-2">
         <RegionSpecificToggle setShowRegionSpecific={setShowRegionSpecific} />

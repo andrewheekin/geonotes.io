@@ -66,17 +66,38 @@ export default function AccountForm({ session }) {
   }
 
   return (
-    <>
+    <div className="w-full">
       <div>
-        <input id="email" type="text" value={session?.user?.email} disabled className="text-2xl font-bold text-black w-full"/>
+        <label htmlFor="username" className="text-2xl font-bold text-black bg-transparent">
+          @
+        </label>
+        <input
+          id="username"
+          type="text"
+          value={username || ''}
+          onChange={(e) => setUsername(e.target.value)}
+          className="text-2xl font-bold text-black bg-transparent"
+        />
       </div>
       <div>
-        <input id="fullName" type="text" value={fullname || ''} onChange={(e) => setFullname(e.target.value)} className="text-lg font-bold text-black w-full bg-transparent"/>
+        <input
+          id="email"
+          type="text"
+          value={session?.user?.email}
+          disabled
+          className="text-md font-bold text-black w-full"
+        />
       </div>
       <div>
-        <label htmlFor="username" className="text-lg font-bold text-black bg-transparent">@</label>
-        <input id="username" type="text" value={username || ''} onChange={(e) => setUsername(e.target.value)} className='text-lg font-bold text-black bg-transparent'/>
+        <input
+          id="fullName"
+          type="text"
+          value={fullname || ''}
+          onChange={(e) => setFullname(e.target.value)}
+          className="text-md font-bold text-black w-full bg-transparent"
+        />
       </div>
+
       {/* Hide website field for now, TODO: determine what to do with this field */}
       {/* <div>
         <label htmlFor="website">Website</label>
@@ -110,6 +131,6 @@ export default function AccountForm({ session }) {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }

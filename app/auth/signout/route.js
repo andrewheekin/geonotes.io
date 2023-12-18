@@ -17,6 +17,9 @@ export async function GET(req) {
     await supabase.auth.signOut()
   }
 
+  // TODO, use a different redirect here?
+  // import { redirect } from 'next/navigation';
+  // how do other tutorials handle redirect after form submissions?
   return NextResponse.redirect(new URL('/', req.url), {
     status: 302,
   })

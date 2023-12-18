@@ -5,7 +5,7 @@ export default async function Account() {
   const session = await getUserSession();
 
   return (
-    <div className="max-w-screen-md mx-auto">
+    <div className="max-w-xl w-full py-2">
       <AccountForm session={session} />
     </div>
   );

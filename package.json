@@ -21,6 +21,7 @@
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-select": "^5.8.0",
     "sonner": "^1.2.4"
   },
   "devDependencies": {

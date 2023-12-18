@@ -1,6 +1,6 @@
 'use server';
 
-import { Avatar, Typography, Card, Chip, CardContent } from '@mui/material';
+import { Avatar, Typography, Chip } from '@mui/material';
 import { getCountryCode } from '../_lib/CountriesList';
 import StreetViewThumbnail from './StreetViewThumbnail';
 import { fetchGeoNotes } from '../_lib/actions';
@@ -9,37 +9,19 @@ export default async function GeoNotesList() {
   const geoNotes = await fetchGeoNotes();
 
   return (
-    <div className="m-4 mx-auto max-w-[900px]">
+    <div className="max-w-5xl w-full">
       {geoNotes && geoNotes.length > 0 ? (
         geoNotes.map((note, index) => (
           <div key={index} className="mb-4 border-4 border-black bg-gray-200 relative shadow rounded">
             {note.region && note.region.length > 0 && (
-              <Chip
-                label={
-                  <Typography style={{ fontFamily: 'monospace', fontSize: '0.7rem', margin: 0, padding: '1px' }}>
-                    REGIONAL
-                  </Typography>
-                }
-                sx={{
-                  position: 'absolute',
-                  top: 8, // Adjust as needed
-                  right: 8, // Adjust as needed
-                  zIndex: 1, // To ensure it stays on top
-                  borderRadius: 0,
-                  padding: 0,
-                  lineHeight: 1,
-                }}
-              />
+              <div className="absolute top-2 right-2 rounded-lg bg-gray-300 py-1 px-2">
+                <p className="text-xs text-gray font-semibold">regional</p>
+              </div>
             )}
-            <CardContent style={{ padding: '1rem' }}>
-              <Typography variant="h5" component="div" style={{ fontFamily: 'monospace', color: 'black' }}>
-                {note.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" style={{ fontFamily: 'monospace', color: 'black' }}>
-                {note.description}
-              </Typography>
+            <div className="p-2 md:p-3">
+              <p className="text-xl text-black font-semibold tracking-tighter">{note.title}</p>
+              <p className="text-sm text-black font-normal tracking-tight">{note.description}</p>
               <div style={{ marginTop: '10px' }}>
-                {/* Country chip */}
                 <Chip
                   label={note.country}
                   style={{ marginRight: '5px', marginBottom: '5px', fontFamily: 'monospace' }}
@@ -51,7 +33,6 @@ export default async function GeoNotesList() {
                     />
                   }
                 />
-                {/* Regions chip */}
                 {note.region &&
                   note.region.length > 0 &&
                   note.region.map((reg, index) => (
@@ -93,7 +74,7 @@ export default async function GeoNotesList() {
                 pitch={note.pitch}
                 zoom={note.zoom}
               />
-            </CardContent>
+            </div>
           </div>
         ))
       ) : (

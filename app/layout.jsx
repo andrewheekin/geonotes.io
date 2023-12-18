@@ -1,6 +1,6 @@
 import { Open_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
-import { Toaster } from "sonner";
+import { Toaster } from 'sonner';
 import { getUserSession } from './_lib/server-data';
 import Navbar from './_components/Navbar';
 import Gradient from './_components/Gradient';
@@ -21,10 +21,10 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={open_sans.className}>
+        <Gradient />
         <Navbar user={user} />
-        <main className="d-flex mh-100vh min-h-screen flex-column align-items-start py-4">
-          <Toaster closeButton richColors theme={"system"} />
-          <Gradient />
+        <main className="flex flex-col items-center min-h-screen p-2 md:p-4">
+          <Toaster closeButton richColors theme={'system'} />
           {children}
         </main>
         <Analytics />
