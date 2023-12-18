@@ -36,7 +36,7 @@ export default function GeoNotesContainer() {
   // }
 
   return (
-    <div className="mx-auto max-w-[900px]">
+    <div className="m-4 mx-auto max-w-[900px]">
       <div className="flex flex-col sm:flex-row gap-3 w-full">
         <div className="flex-grow w-full">
           <CountriesAutocomplete setSelectedCountries={setSelectedCountries} />
