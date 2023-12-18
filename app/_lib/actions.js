@@ -5,12 +5,14 @@ import { redirect } from 'next/navigation';
 import { unstable_noStore as noStore } from 'next/cache';
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-const supabase = createServerActionClient({ cookies });
+
+const cookieStore = cookies();
+const supabase = createServerActionClient({ cookies: () => cookieStore });
 
 export async function fetchGeoNotes() {
   noStore();
 
-  const { data, error } = await supabase.from('geonote').select('*').limit(20);
+  const { data, error } = await supabase.from('geonote').select('*'); //.limit(20);
 
   if (error) {
     console.error('Database Error: ', error);
@@ -50,12 +52,11 @@ export async function createGeoNote(prevState, formData) {
   const zoom = streetviewurl.match(/,(\d+\.?\d*)y,/)[1];
   const pitch = streetviewurl.match(/,(\d+\.?\d*)t/)[1];
 
-  console.log("lat: " + lat);
-  console.log("lng: " + lng);
-  console.log("heading: " + heading);
-  console.log("zoom: " + zoom);
-  console.log("pitch: " + pitch);
-  
+  console.log('lat: ' + lat);
+  console.log('lng: ' + lng);
+  console.log('heading: ' + heading);
+  console.log('zoom: ' + zoom);
+  console.log('pitch: ' + pitch);
 
   try {
     await supabase.from('geonote').insert([
