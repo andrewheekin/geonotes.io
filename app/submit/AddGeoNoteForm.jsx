@@ -14,7 +14,7 @@ export default function AddGeoNoteForm() {
 
   return (
     <form action={formAction}>
-      <div className="rounded-md p-4 md:p-6">
+      <div className="rounded-md py-4 md:py-6">
         {/* Title */}
         <div className="mb-4">
           <label htmlFor="title" className="mb-2 block text-sm font-medium">
@@ -40,6 +40,20 @@ export default function AddGeoNoteForm() {
             required
             className="w-full rounded-md border border-gray-200 p-2 text-sm"
           ></textarea>
+        </div>
+
+        {/* Street View Link */}
+        <div className="mb-4">
+          <label htmlFor="streetViewLink" className="mb-2 block text-sm font-medium">
+            Street View Link
+          </label>
+          <input
+            id="streetViewLink"
+            name="streetViewLink"
+            type="text"
+            required
+            className="w-full rounded-md border border-gray-200 p-2 text-sm"
+          />
         </div>
 
         {/* Categories */}
@@ -77,7 +91,7 @@ export default function AddGeoNoteForm() {
         </div>
 
         {/* Region */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="region" className="mb-2 block text-sm font-medium">
             Region (Optional)
           </label>
@@ -88,21 +102,7 @@ export default function AddGeoNoteForm() {
               </option>
             ))}
           </select>
-        </div>
-
-        {/* Street View Link */}
-        <div className="mb-4">
-          <label htmlFor="streetViewLink" className="mb-2 block text-sm font-medium">
-            Street View Link
-          </label>
-          <input
-            id="streetViewLink"
-            name="streetViewLink"
-            type="text"
-            required
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
-          />
-        </div>
+        </div> */}
       </div>
 
       <div className="mt-6 flex justify-end gap-4">

@@ -56,12 +56,6 @@ export async function createGeoNote(prevState, formData) {
   const zoom = streetviewurl.match(/,(\d+\.?\d*)y,/)[1];
   const pitch = parseFloat(streetviewurl.match(/,(\d+\.?\d*)t/)[1]) - 90.0;
 
-  console.log('lat: ' + lat);
-  console.log('lng: ' + lng);
-  console.log('heading: ' + heading);
-  console.log('zoom: ' + zoom);
-  console.log('pitch: ' + pitch);
-
   try {
     await supabase.from('geonote').insert([
       {

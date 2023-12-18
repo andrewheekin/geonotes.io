@@ -66,23 +66,22 @@ export default function AccountForm({ session }) {
   }
 
   return (
-    <div className="form-widget">
+    <>
       <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session?.user?.email} disabled />
+        <input id="email" type="text" value={session?.user?.email} disabled className="text-2xl font-bold text-black w-full"/>
       </div>
       <div>
-        <label htmlFor="fullName">Full Name</label>
-        <input id="fullName" type="text" value={fullname || ''} onChange={(e) => setFullname(e.target.value)} />
+        <input id="fullName" type="text" value={fullname || ''} onChange={(e) => setFullname(e.target.value)} className="text-lg font-bold text-black w-full bg-transparent"/>
       </div>
       <div>
-        <label htmlFor="username">Username</label>
-        <input id="username" type="text" value={username || ''} onChange={(e) => setUsername(e.target.value)} />
+        <label htmlFor="username" className="text-lg font-bold text-black bg-transparent">@</label>
+        <input id="username" type="text" value={username || ''} onChange={(e) => setUsername(e.target.value)} className='text-lg font-bold text-black bg-transparent'/>
       </div>
-      <div>
+      {/* Hide website field for now, TODO: determine what to do with this field */}
+      {/* <div>
         <label htmlFor="website">Website</label>
         <input id="website" type="url" value={website || ''} onChange={(e) => setWebsite(e.target.value)} />
-      </div>
+      </div> */}
 
       <Avatar
         uid={user?.id}
@@ -96,7 +95,7 @@ export default function AccountForm({ session }) {
 
       <div>
         <button
-          className="button primary block"
+          className="button primary block underline"
           onClick={() => updateProfile({ fullname, username, website, avatar_url })}
           disabled={loading}
         >
@@ -106,11 +105,11 @@ export default function AccountForm({ session }) {
 
       <div>
         <form action="/auth/signout" method="post">
-          <button className="button block" type="submit">
+          <button className="button block underline" type="submit">
             Sign out
           </button>
         </form>
       </div>
-    </div>
+    </>
   );
 }

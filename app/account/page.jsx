@@ -6,9 +6,7 @@ export default async function Account() {
 
   return (
     <div className="max-w-screen-md mx-auto">
-      <div className="col-6">
-        <AccountForm session={session} />
-      </div>
+      <AccountForm session={session} />
     </div>
   );
 }
