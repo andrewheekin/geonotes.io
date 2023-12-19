@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
+import Select from 'react-select';
 import Link from 'next/link';
 import { createGeoNote } from '../_lib/actions';
-import categories from '../_lib/CategoriesList';
 import countries from '../_lib/CountriesList';
 import regions from '../_lib/RegionsList';
+import categories from '../_lib/CategoriesList';
 
 export default function AddGeoNoteForm() {
   // State variables for each form field
@@ -14,7 +15,7 @@ export default function AddGeoNoteForm() {
   const [streetViewLink, setStreetViewLink] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [country, setCountry] = useState('');
-  const [region, setRegion] = useState([]);
+  const [selectedRegions, setSelectedRegions] = useState([]);
 
   // Handle form submission
   const handleSubmit = (event) => {
@@ -31,23 +32,27 @@ export default function AddGeoNoteForm() {
   };
 
   // Handlers for each form field
-  const handleCategoryChange = (event) => {
-    const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-    setSelectedCategories(selectedOptions);
+  const handleCategoryChange = (selectedOptions) => {
+    const chosen = selectedOptions.map((option) => option.value);
+    setSelectedCategories(chosen);
   };
 
-  const handleRegionChange = (event) => {
-    const selectedRegions = Array.from(event.target.selectedOptions, (option) => option.value);
-    setRegion(selectedRegions);
+  const selectedCategoryObjects = categories.filter((category) => selectedCategories.includes(category.value));
+
+  const handleRegionChange = (selectedOptions) => {
+    const chosen = selectedOptions.map((option) => option.value);
+    setSelectedRegions(chosen);
   };
+
+  const selectedRegionObjects = regions.filter((region) => selectedRegions.includes(region.value));
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="rounded-md py-4 md:py-6">
+      <div className="rounded-lg p-4 md:py-6 bg-sky-100">
         {/* Title */}
         <div className="mb-4">
           <label htmlFor="title" className="mb-2 block text-sm font-medium">
-            Title
+            Title*
           </label>
           <input
             id="title"
@@ -63,7 +68,7 @@ export default function AddGeoNoteForm() {
         {/* Description */}
         <div className="mb-4">
           <label htmlFor="description" className="mb-2 block text-sm font-medium">
-            Description
+            Description*
           </label>
           <textarea
             id="description"
@@ -78,7 +83,7 @@ export default function AddGeoNoteForm() {
         {/* Street View Link */}
         <div className="mb-4">
           <label htmlFor="streetViewLink" className="mb-2 block text-sm font-medium">
-            Street View Link
+            Street View Link*
           </label>
           <input
             id="streetViewLink"
@@ -94,29 +99,31 @@ export default function AddGeoNoteForm() {
         {/* Categories */}
         <div className="mb-4">
           <label htmlFor="categories" className="mb-2 block text-sm font-medium">
-            Categories
+            Categories*
           </label>
-          <select
-            id="categories"
-            name="categories"
-            multiple
-            required
-            value={selectedCategories}
+          <Select
+            options={categories}
+            isMulti
+            placeholder="Pick categories..."
             onChange={handleCategoryChange}
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
-          >
-            {categories.map((category, idx) => (
-              <option key={idx} value={category.value}>
-                {category.label}
-              </option>
-            ))}
-          </select>
+            value={selectedCategoryObjects}
+            classNames={{
+              container: (state) => 'w-full',
+              control: (state) => 'border-gray-400 p-1 rounded-lg',
+              // option: (state) => 'bg-transparent hover:bg-gray-100',
+              menu: (state) => 'bg-gray-100 rounded-lg',
+              placeholder: (state) => 'text-sm tracking-tight font-normal',
+              multiValue: (state) => 'text-lg tracking-tight bg-gray-300 rounded-2xl px-2 py-0',
+              multiValueRemove: (state) =>
+                'text-xl tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800',
+            }}
+          />
         </div>
 
         {/* Country */}
         <div className="mb-4">
           <label htmlFor="country" className="mb-2 block text-sm font-medium">
-            Country
+            Country*
           </label>
           <select
             id="country"
@@ -137,22 +144,25 @@ export default function AddGeoNoteForm() {
         {/* Region */}
         <div className="mb-4">
           <label htmlFor="region" className="mb-2 block text-sm font-medium">
-            Region (Optional)
+            Region (optional)
           </label>
-          <select
-            id="region"
-            name="region"
-            multiple
-            value={region}
+          <Select
+            options={regions}
+            isMulti
+            placeholder="Pick regions..."
             onChange={handleRegionChange}
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
-          >
-            {regions.map((region, idx) => (
-              <option key={idx} value={region.value}>
-                {region.label}
-              </option>
-            ))}
-          </select>
+            value={selectedRegionObjects}
+            classNames={{
+              container: (state) => 'w-full',
+              control: (state) => 'border-gray-400 p-1 rounded-lg',
+              // option: (state) => 'bg-transparent hover:bg-gray-100',
+              menu: (state) => 'bg-gray-100 rounded-lg',
+              placeholder: (state) => 'text-sm tracking-tight font-normal',
+              multiValue: (state) => 'text-lg tracking-tight bg-gray-300 rounded-2xl px-2 py-0',
+              multiValueRemove: (state) =>
+                'text-xl tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800',
+            }}
+          />
         </div>
       </div>
 
