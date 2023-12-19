@@ -45,10 +45,14 @@ export default function Navbar({ user }) {
         className={`w-full md:flex md:items-center md:w-auto md:opacity-100 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
         animate={isOpen ? 'open' : 'closed'}
         // Note, these variants styles are applied to desktop as well - this can cause issues with desktop styles
-        variants={{
-          open: { height: 'auto', transition: { duration: 0.3, type: 'spring' } },
-          closed: { height: 0, transition: { duration: 0.2 } },
-        }}
+        variants={
+          IS_MOBILE()
+            ? {
+                open: { display: 'block', height: 'auto', transition: { duration: 0.3, type: 'spring' } },
+                closed: { display: 'none', height: 0, transition: { duration: 0.2 } },
+              }
+            : { open: {}, closed: {} }
+        }
         initial="closed"
       >
         <ul className="pt-4 md:flex md:justify-between md:pt-0">

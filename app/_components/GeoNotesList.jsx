@@ -1,5 +1,6 @@
 'use server';
 
+import Link from 'next/link';
 import { Avatar, Typography, Chip } from '@mui/material';
 import { getCountryCode } from '../_lib/CountriesList';
 import StreetViewThumbnail from './StreetViewThumbnail';
@@ -7,6 +8,29 @@ import { fetchGeoNotes } from '../_lib/actions';
 
 export default async function GeoNotesList({ searchParams }) {
   const geoNotes = await fetchGeoNotes({ searchParams });
+
+  const createMissingGeoNoteText = (searchParams) => {
+    const hasCountries =
+      Object.prototype.hasOwnProperty.call(searchParams, 'countries') && searchParams.countries.length > 0;
+    const hasCategories =
+      Object.prototype.hasOwnProperty.call(searchParams, 'categories') && searchParams.categories.length > 0;
+
+    let countries = [];
+    let categories = [];
+
+    if (hasCountries) {
+      countries = searchParams.countries.split(',');
+    }
+    if (hasCategories) {
+      categories = searchParams.categories.split(',');
+    }
+
+    let combined = [...countries, ...categories];
+
+    return `No GeoNotes yet for ${combined.length > 0 ? combined.join(', ') : 'this search'}`;
+  };
+
+  const missingGeoNoteText = createMissingGeoNoteText(searchParams);
 
   return (
     <div className="max-w-5xl w-full">
@@ -20,7 +44,7 @@ export default async function GeoNotesList({ searchParams }) {
             )}
             <div className="p-2 md:p-3">
               <p className="text-xl text-black font-semibold tracking-tighter">{note.title}</p>
-              <p className="text-sm text-black font-normal tracking-tight">{note.description}</p>
+              <p className="text-sm text-black font-medium tracking-tight">{note.description}</p>
               <div style={{ marginTop: '10px' }}>
                 <Chip
                   label={note.country}
@@ -79,8 +103,13 @@ export default async function GeoNotesList({ searchParams }) {
         ))
       ) : (
         <div className="text-center">
-          <p className="text-xl text-black font-semibold tracking-tighter">No GeoNotes yet for this search</p>
+          <p className="text-xl text-black font-semibold tracking-tighter">{missingGeoNoteText}</p>
           <p className="text-xl text-black font-normal tracking-tight"> :(</p>
+          <div className="m-8">
+            <Link href="/submit" className="text-lg underline hover:text-gray-500">
+              Add one!
+            </Link>
+          </div>
         </div>
       )}
     </div>

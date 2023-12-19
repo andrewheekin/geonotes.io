@@ -125,7 +125,7 @@ export default function AccountForm({ session }) {
       </div>
 
       <div>
-        <form action="/auth/signout" method="post">
+        <form action="/auth/signout" method="GET">
           <button className="button block underline" type="submit">
             Sign out
           </button>

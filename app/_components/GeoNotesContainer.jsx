@@ -77,7 +77,7 @@ export default function GeoNotesContainer() {
         <GeoNoteSearch />
       </div>
       <div className="flex flex-row mb-4 mt-2">
-        <RegionSpecificToggle setShowRegionSpecific={setShowRegionSpecific} />
+        {/* <RegionSpecificToggle setShowRegionSpecific={setShowRegionSpecific} /> */}
       </div>
     </div>
   );

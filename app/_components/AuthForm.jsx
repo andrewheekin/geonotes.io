@@ -7,13 +7,25 @@ export default function AuthForm() {
   const supabase = createClientComponentClient();
 
   const redirectUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`;
-  console.log('redirectUrl', redirectUrl)
+  console.log('redirectUrl', redirectUrl);
 
   return (
     <Auth
+      appearance={{
+        theme: ThemeSupa,
+        style: {
+          button: {
+            backgroundColor: 'lightblue',
+            borderColor: '#86b6c5',
+            borderWidth: '1px',
+            color: 'black',
+            letterSpacing: '-0.03em',
+            fontWeight: 'semibold',
+          },
+        },
+      }}
       supabaseClient={supabase}
       view="magic_link"
-      appearance={{ theme: ThemeSupa }}
       showLinks={false}
       providers={[]}
       redirectTo={redirectUrl} // Note, on Supabase this comes from the "Site URL" ("Auth" -> "URL Configuration") and not this variable

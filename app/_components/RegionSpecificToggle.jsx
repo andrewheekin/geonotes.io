@@ -11,8 +11,8 @@ export default function CheckboxLabels({ setShowRegionSpecific }) {
   return (
     <FormGroup>
       <FormControlLabel
-        control={<Checkbox defaultChecked onChange={handleChange} color="default" />}
-        label={<Typography style={{ fontSize: '0.8rem', fontWeight: 600 }}>show region-specific</Typography>}
+        control={<Checkbox defaultChecked onChange={handleChange} />}
+        label={<p className="text-sm font-semibold text-black tracking-tight">show region-specific</p>}
       />
     </FormGroup>
   );

@@ -1,7 +1,8 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+// import { revalidatePath } from 'next/cache';
+// import { redirect } from 'next/navigation';
+// import { NextResponse } from 'next/server';
 import { unstable_noStore as noStore } from 'next/cache';
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
@@ -187,62 +188,74 @@ export async function fetchGeoNotes({ searchParams }) {
   }
 }
 
-export async function createGeoNote(prevState, formData) {
+export async function createGeoNote(formData) {
   noStore();
 
   const cookieStore = cookies();
   const supabase = createServerActionClient({ cookies: () => cookieStore });
   const {
     data: {
-      user: { email },
+      user: { id },
     },
   } = await supabase.auth.getUser();
 
-  const { title, description, categories, country, region, author, streetviewurl, created_at } = {
-    title: formData.get('title'),
-    description: formData.get('description'),
-    categories: formData.getAll('categories'),
-    country: formData.get('country'),
-    region: formData.getAll('region'),
-    streetviewurl: formData.get('streetViewLink'),
-    created_at: new Date(),
-    author: email,
-  };
+  const { data, error } = await supabase.from('profiles').select('username').eq('id', id);
+
+  // Supabase returns results as an array, take the first element
+  const username = data[0].username;
+
+  const { title, description, categories, country, region, streetViewLink } = formData;
+  const created_at = new Date();
 
   /**
    * Parse out the Street View URL
    */
-
-  const lat = streetviewurl.match(/@(-?\d+\.\d+),/)[1];
-  const lng = streetviewurl.match(/@-?\d+\.\d+,(-?\d+\.\d+)/)[1];
-  const heading = streetviewurl.match(/,(\d+\.?\d*)h,/)[1];
-  const zoom = streetviewurl.match(/,(\d+\.?\d*)y,/)[1];
-  const pitch = parseFloat(streetviewurl.match(/,(\d+\.?\d*)t/)[1]) - 90.0;
+  const lat = streetViewLink.match(/@(-?\d+\.\d+),/)[1];
+  const lng = streetViewLink.match(/@-?\d+\.\d+,(-?\d+\.\d+)/)[1];
+  const heading = streetViewLink.match(/,(\d+\.?\d*)h,/)[1];
+  const zoom = streetViewLink.match(/,(\d+\.?\d*)y,/)[1];
+  const pitch = parseFloat(streetViewLink.match(/,(\d+\.?\d*)t/)[1]) - 90.0;
 
   try {
-    await supabase.from('geonote').insert([
-      {
-        title,
-        description,
-        categories,
-        created_at,
-        author,
-        country,
-        streetviewurl,
-        region,
-        lat,
-        lng,
-        heading,
-        zoom,
-        pitch,
-      },
-    ]);
+    let addedGeoNote = await supabase
+      .from('geonote')
+      .insert([
+        {
+          title,
+          description,
+          categories,
+          created_at,
+          author: username,
+          author_id: id,
+          country,
+          streetviewurl: streetViewLink,
+          region,
+          lat,
+          lng,
+          heading,
+          zoom,
+          pitch,
+        },
+      ])
+      .select();
 
-    console.log('GeoNote created successfully!');
+    console.log('GeoNote created successfully!', addedGeoNote);
 
-    // If the database operation is successful, revalidate and redirect
-    // revalidatePath("/account");
-    // redirect("/account");
+    // Insert into geonote_category_mapping table
+    await supabase.from('geonote_category_mapping').insert(
+      categories.map((category) => ({
+        geonote_id: addedGeoNote?.data[0].id,
+        category_name: category,
+      }))
+    );
+
+    // TODO: refactor this redirect
+    // revalidatePath('/');
+    // redirect('/');
+
+    // Giving the error:
+    //  ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported. at stringify (<anonymous>)
+    // return NextResponse.redirect(`${process.env.SITE_URL}/`, { status: 302 });
   } catch (error) {
     console.error('Database Error: ', error);
     return {
