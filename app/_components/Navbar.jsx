@@ -6,9 +6,16 @@ import Link from 'next/link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion'; // Import motion
+import { IS_MOBILE } from '../_lib/helpers';
 
 export default function Navbar({ user }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleLinkClick = () => {
+    if (IS_MOBILE()) {
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav className="bg-transparent shadow-none container mx-auto flex flex-wrap items-center justify-between px-4 py-2">
@@ -48,7 +55,7 @@ export default function Navbar({ user }) {
             <Link
               href="https://github.com/andrewheekin/geonotes.io"
               className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={handleLinkClick}
             >
               <GitHubIcon />
             </Link>
@@ -57,7 +64,7 @@ export default function Navbar({ user }) {
             <Link
               href="/about"
               className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 px-2"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={handleLinkClick}
             >
               About
             </Link>
@@ -68,7 +75,7 @@ export default function Navbar({ user }) {
                 <Link
                   href="/submit"
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 px-2"
-                  onClick={() => setIsOpen(!isOpen)}
+                  onClick={handleLinkClick}
                 >
                   Add GeoNote
                 </Link>
@@ -77,7 +84,7 @@ export default function Navbar({ user }) {
                 <Link
                   href="/account"
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2"
-                  onClick={() => setIsOpen(!isOpen)}
+                  onClick={handleLinkClick}
                 >
                   <div className="text-black hover:text-gray-500">Account</div>
                 </Link>
@@ -89,7 +96,7 @@ export default function Navbar({ user }) {
                 <div
                   onClick={() => {
                     toast('Login to add GeoNotes!');
-                    setIsOpen(!isOpen);
+                    handleLinkClick();
                   }}
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 px-2 cursor-pointer"
                 >
@@ -100,7 +107,7 @@ export default function Navbar({ user }) {
                 <Link
                   href="/login"
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2"
-                  onClick={() => setIsOpen(!isOpen)}
+                  onClick={handleLinkClick}
                 >
                   <div className="text-black hover:text-gray-500">Login</div>
                 </Link>
