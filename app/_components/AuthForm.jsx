@@ -16,7 +16,7 @@ export default function AuthForm() {
       appearance={{ theme: ThemeSupa }}
       showLinks={false}
       providers={[]}
-      redirectTo={redirectUrl}
+      redirectTo={redirectUrl} // Note, on Supabase this comes from the "Site URL" ("Auth" -> "URL Configuration") and not this variable
     />
   );
 }

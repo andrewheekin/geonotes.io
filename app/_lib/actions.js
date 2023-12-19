@@ -42,6 +42,22 @@ export async function fetchGeoNotes({ searchParams }) {
     return data;
   }
 
+  if (Object.prototype.hasOwnProperty.call(searchParams, 'author') && searchParams.author.length > 0) {
+    const author = searchParams.author;
+    console.log('author', author);
+
+    const { data, error } = await supabase.from('geonote').select('*').eq('author_id', author);
+
+    if (error) {
+      console.error('Database Error: ', error);
+      return {
+        message: 'Database Error: Failed to Fetch GeoNotes.',
+      };
+    }
+
+    return data;
+  }
+
   const { data, error } = await supabase.from('geonote').select('*').limit(20);
 
   if (error) {
