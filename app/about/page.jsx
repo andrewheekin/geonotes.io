@@ -7,7 +7,7 @@ export default function About() {
         <a href="https://www.geoguessr.com/user/5f0524fe657099387000f26e" className="underline">
           @geoheek
         </a>{' '}
-        to help share tips about Google Street View clues from around the 🌎 (Note, GeoNotes is not affiliated with
+        to help share tips about Google Street View clues from around the 🌎. (GeoNotes is not affiliated with
         GeoGuessr)
       </p>
       <p className="text-md text-black font-semibold tracking-tight my-2 py-2 rounded-md">
@@ -15,7 +15,7 @@ export default function About() {
         <b>
           actively looking for collaborators - software engineers (Next.js) or just anyone passionate about GeoGuessr
         </b>{' '}
-        to help build out GeoNotes.io 👇👇
+        to help build GeoNotes.io 👇
         <a
           href="https://github.com/users/andrewheekin/projects/1/views/1"
           className="text-black-800 text-md hover:text-gray-400 underline"
