@@ -42,19 +42,20 @@ export default function Navbar({ user }) {
         </button>
       </div>
       <motion.div
-        className="w-full md:flex md:items-center md:w-auto"
+        className={`w-full md:flex md:items-center md:w-auto md:opacity-100 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
         animate={isOpen ? 'open' : 'closed'}
+        // Note, these variants styles are applied to desktop as well - this can cause issues with desktop styles
         variants={{
-          open: { opacity: 1, height: 'auto', transition: { duration: 0.3, type: 'spring' } },
-          closed: { opacity: 0, height: 0, transition: { duration: 0.2 } },
+          open: { height: 'auto', transition: { duration: 0.3, type: 'spring' } },
+          closed: { height: 0, transition: { duration: 0.2 } },
         }}
         initial="closed"
       >
-        <ul className="pt-4 md:flex md:justify-between md:pt-0 font-semibold tracking-tight">
+        <ul className="pt-4 md:flex md:justify-between md:pt-0">
           <li>
             <Link
               href="https://github.com/andrewheekin/geonotes.io"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight"
               onClick={handleLinkClick}
             >
               <GitHubIcon />
@@ -63,7 +64,7 @@ export default function Navbar({ user }) {
           <li>
             <Link
               href="/about"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 px-2"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight px-2"
               onClick={handleLinkClick}
             >
               About
@@ -74,7 +75,7 @@ export default function Navbar({ user }) {
               <li>
                 <Link
                   href="/submit"
-                  className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 px-2"
+                  className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight px-2"
                   onClick={handleLinkClick}
                 >
                   Add GeoNote
@@ -86,7 +87,7 @@ export default function Navbar({ user }) {
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2"
                   onClick={handleLinkClick}
                 >
-                  <div className="text-black hover:text-gray-500">Account</div>
+                  <div className="text-black hover:text-gray-500 font-semibold tracking-tight">Account</div>
                 </Link>
               </li>
             </>
@@ -98,7 +99,7 @@ export default function Navbar({ user }) {
                     toast('Login to add GeoNotes!');
                     handleLinkClick();
                   }}
-                  className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 px-2 cursor-pointer"
+                  className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight px-2 cursor-pointer"
                 >
                   Add GeoNote
                 </div>
@@ -109,7 +110,7 @@ export default function Navbar({ user }) {
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2"
                   onClick={handleLinkClick}
                 >
-                  <div className="text-black hover:text-gray-500">Login</div>
+                  <div className="text-black hover:text-gray-500 font-semibold tracking-tight">Login</div>
                 </Link>
               </li>
             </>

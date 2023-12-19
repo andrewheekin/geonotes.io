@@ -11,6 +11,34 @@ export default function GeoNotesContainer() {
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [showRegionSpecific, setShowRegionSpecific] = useState(true);
+  const [isOnline, setIsOnline] = useState(true);
+
+  useEffect(() => {
+    // Update isOnline state based on actual navigator status when component mounts
+    setIsOnline(navigator.onLine);
+  
+    // Event listeners to track online/offline status
+    const setOnline = () => setIsOnline(true);
+    const setOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', setOnline);
+    window.addEventListener('offline', setOffline);
+
+    // Cleanup function to remove the event listeners
+    return () => {
+      window.removeEventListener('online', setOnline);
+      window.removeEventListener('offline', setOffline);
+    };
+  }, []);
+
+  // Render "No internet" message when offline
+  if (!isOnline) {
+    return (
+      <div className="max-w-5xl w-full flex justify-center items-center my-8">
+        <p className="text-xl text-black font-semibold tracking-tighter">Please connect to the internet</p>
+      </div>
+    );
+  }
 
   // useEffect(() => {
   //   const filteredNotes = [];

@@ -69,6 +69,12 @@ supabase db reset
 supabase db push
 ```
 
+#### If a local migration says it has been applied, but isn't showing up in the remote database
+On the Supabase dashboard, go to Table Editor > supabase_migrations schema > schema_migrations table. Delete the row for the migration that is not showing up. Then run `supabase db push` again. Note, this must be done from the SQL editor. Ex:
+```
+delete from supabase_migrations.schema_migrations where version='20231219141738'
+```
+
 
 ## Google Street View and Maps Notes
 
