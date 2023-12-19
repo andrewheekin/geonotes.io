@@ -1,10 +1,13 @@
-'use client'
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+'use client';
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 export default function AuthForm() {
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient();
+
+  const redirectUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`;
+  console.log('redirectUrl', redirectUrl)
 
   return (
     <Auth
@@ -13,7 +16,7 @@ export default function AuthForm() {
       appearance={{ theme: ThemeSupa }}
       showLinks={false}
       providers={[]}
-      redirectTo={`${process.env.NEXT_PUBLIC_API}/auth/callback`}
+      redirectTo={redirectUrl}
     />
-  )
+  );
 }
