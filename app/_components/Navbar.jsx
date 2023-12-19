@@ -45,8 +45,8 @@ export default function Navbar({ user }) {
         className="w-full md:flex md:items-center md:w-auto"
         animate={isOpen ? 'open' : 'closed'}
         variants={{
-          open: { opacity: 1, height: 'auto', transition: { duration: 0.1, type: 'spring' } },
-          closed: { opacity: 0, height: 0, transition: { duration: 0 } },
+          open: { opacity: 1, height: 'auto', transition: { duration: 0.3, type: 'spring' } },
+          closed: { opacity: 0, height: 0, transition: { duration: 0.2 } },
         }}
         initial="closed"
       >
