@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <div className="max-w-3xl w-full py-2 px-4">
-      <h1 className="text-2xl font-bold text-black">About GeoNotes.io</h1>
+      <h1 className="text-2xl font-bold text-black tracking-tight">About GeoNotes.io</h1>
       <p className="text-md text-black font-semibold tracking-tight my-2 py-2 rounded-md">
         GeoNotes.io was created by{' '}
         <a href="https://www.geoguessr.com/user/5f0524fe657099387000f26e" className="underline">
