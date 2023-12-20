@@ -24,7 +24,7 @@ export default async function RootLayout({ children }) {
         <Gradient />
         <Navbar user={user} />
         <main className="flex flex-col items-center min-h-screen p-2 md:p-4">
-          <Toaster closeButton richColors theme={'system'} />
+          <Toaster closeButton richColors theme={'system'} position='top-center' />
           {children}
         </main>
         <Analytics />
