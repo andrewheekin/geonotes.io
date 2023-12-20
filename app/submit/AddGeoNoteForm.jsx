@@ -26,7 +26,7 @@ export default function AddGeoNoteForm() {
       streetViewLink,
       categories: selectedCategories,
       country,
-      region,
+      region: selectedRegions,
     };
     createGeoNote(formData);
   };
