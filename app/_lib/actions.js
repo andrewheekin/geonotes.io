@@ -52,7 +52,11 @@ export async function fetchGeoNotes({ searchParams }) {
     /**
      * Case where author is provided
      */
-    const { data, error } = await supabase.from('geonote').select('*').eq('author_id', author);
+    const { data, error } = await supabase
+      .from('geonote')
+      .select('*')
+      .eq('author_id', author)
+      .order('created_at', { ascending: false });
 
     if (error) {
       console.error('Database Error: ', error);

@@ -76,13 +76,13 @@ export default function GeoNoteSearch() {
       isMulti
       classNames={{
         container: (state) => 'w-full',
-        control: (state) => 'border-gray-400 bg-transparent p-2 rounded-lg',
-        option: (state) => 'bg-transparent hover:bg-gray-100',
+        control: (state) => 'border-2 border-gray-400 hover:border-gray-500 bg-transparent p-2 rounded-lg',
+        option: (state) => 'bg-transparent hover:bg-gray-200 duration-100',
         menu: (state) => 'bg-gray-100 rounded-lg',
-        placeholder: (state) => 'text-sm tracking-tight font-normal',
+        placeholder: (state) => 'text-md tracking-tight font-normal',
         multiValue: (state) => 'text-lg tracking-tight bg-gray-300 rounded-2xl px-2 py-1',
         multiValueRemove: (state) =>
-          'text-xl tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800',
+          'text-xl tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800 duration-100'
       }}
     />
   );

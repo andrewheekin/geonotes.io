@@ -4,9 +4,9 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { toast } from 'sonner';
 import { motion } from 'framer-motion'; // Import motion
 import { IS_MOBILE } from '../_lib/helpers';
+import { loginToAddGeoNotesToast } from '../_lib/toasts'
 
 export default function Navbar({ user }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -118,7 +118,7 @@ export default function Navbar({ user }) {
               <li>
                 <div
                   onClick={() => {
-                    toast('Login to add GeoNotes!', { description: (<div>Please <Link href="/login" className='underline'>log in</Link> to add new GeoNotes</div>) });
+                    loginToAddGeoNotesToast()
                     handleLinkClick();
                   }}
                   className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] duration-100 rounded"

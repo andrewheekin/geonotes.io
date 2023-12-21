@@ -5,6 +5,7 @@ import { Avatar, Typography, Chip } from '@mui/material';
 import { getCountryCode } from '../_lib/CountriesList';
 import StreetViewThumbnail from './StreetViewThumbnail';
 import { fetchGeoNotes } from '../_lib/actions';
+// import { loginToAddGeoNotesToast } from '../_lib/toasts'
 
 export default async function GeoNotesList({ searchParams }) {
   const geoNotes = await fetchGeoNotes({ searchParams });
