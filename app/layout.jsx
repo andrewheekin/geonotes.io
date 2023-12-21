@@ -32,8 +32,8 @@ export default async function RootLayout({ children }) {
             duration={1500}
             toastOptions={{
               classNames: {
-                title: 'text-lg pt-2 px-4',
-                description: 'text-md py-2 px-4',
+                title: `${open_sans.className} text-lg tracking-tighter font-bold pt-2 px-4`,
+                description: `${open_sans.className} text-md tracking-tight font-semibold py-2 px-4`,
                 // toast?: string;
                 // loader?: string;
                 // closeButton?: string;
