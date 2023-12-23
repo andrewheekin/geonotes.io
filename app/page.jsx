@@ -1,17 +1,20 @@
 import { Suspense } from 'react';
 import GeoNotesList from './_components/GeoNotesList';
-import GeoNotesContainer from './_components/GeoNotesContainer';
+import OnlineIndicator from './_components/OnlineIndicator';
 import ContributorBanner from './_components/ContributorBanner';
+import GeoNoteSearch from './_components/GeoNoteSearch';
+import PostFilter from './_components/PostFilter';
 
 export default async function Home({ searchParams }) {
   return (
-    <>
+    <div className="max-w-5xl w-full">
       <ContributorBanner />
-      <GeoNotesContainer />
+      <OnlineIndicator />
+      <GeoNoteSearch />
+      <PostFilter />
       <Suspense fallback={null}>
-        {/* GeoNotesList is wrapped in Suspense because it is making a fetch request */}
         <GeoNotesList searchParams={searchParams} />
       </Suspense>
-    </>
+    </div>
   );
 }

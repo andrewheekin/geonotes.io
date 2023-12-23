@@ -1,3 +1,5 @@
+'use client';
+
 import Select from 'react-select';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import CountriesList from '../_lib/CountriesList';
@@ -34,7 +36,6 @@ export default function GeoNoteSearch() {
   const { replace } = useRouter();
 
   const handleChange = (selectedOptions) => {
-
     // Split selected options by type
     const selectedCountries = selectedOptions.filter((option) => option.type === 'country');
     const selectedCategories = selectedOptions.filter((option) => option.type === 'category');
@@ -68,22 +69,24 @@ export default function GeoNoteSearch() {
     });
 
   return (
-    <Select
-      options={groupedOptions}
-      value={selectedOptionObjects}
-      placeholder="Countries, categories, regions..."
-      onChange={handleChange}
-      isMulti
-      classNames={{
-        container: (state) => 'w-full',
-        control: (state) => 'border-2 border-gray-400 hover:border-gray-500 bg-transparent p-2 rounded-lg',
-        option: (state) => 'bg-transparent hover:bg-gray-200 duration-100',
-        menu: (state) => 'bg-gray-100 rounded-lg',
-        placeholder: (state) => 'text-md tracking-tight font-normal',
-        multiValue: (state) => 'text-lg tracking-tight bg-gray-300 rounded-2xl px-2 py-1',
-        multiValueRemove: (state) =>
-          'text-xl tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800 duration-100'
-      }}
-    />
+    <div className="flex flex-row mb-4 mt-2 w-full">
+      <Select
+        options={groupedOptions}
+        value={selectedOptionObjects}
+        placeholder="Search countries, categories, regions..."
+        onChange={handleChange}
+        isMulti
+        classNames={{
+          container: () => 'w-full',
+          control: () => 'border-2 border-gray-400 hover:border-gray-500 bg-transparent p-2 rounded-lg',
+          option: () => 'bg-transparent hover:bg-gray-200 duration-100  font-semibold',
+          menu: () => 'bg-gray-100 rounded-lg',
+          placeholder: () => 'text-md tracking-tight font-semibold',
+          multiValue: () => 'text-lg tracking-tight font-semibold bg-gray-300 rounded-2xl px-2 py-1',
+          multiValueRemove: () =>
+            'text-xl tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800 duration-100',
+        }}
+      />
+    </div>
   );
 }

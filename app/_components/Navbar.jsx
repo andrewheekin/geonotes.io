@@ -6,7 +6,7 @@ import Link from 'next/link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { motion } from 'framer-motion'; // Import motion
 import { IS_MOBILE } from '../_lib/helpers';
-import { loginToAddGeoNotesToast } from '../_lib/toasts'
+import { loginToAddGeoNotesToast } from '../_lib/toasts';
 
 export default function Navbar({ user }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,20 +87,20 @@ export default function Navbar({ user }) {
             <>
               <li>
                 <Link
-                  href="/submit"
-                  className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight px-2"
-                  onClick={handleLinkClick}
-                >
-                  Add GeoNote
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/account"
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2"
                   onClick={handleLinkClick}
                 >
                   <div className="text-black hover:text-gray-500 font-semibold tracking-tight">Account</div>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/submit"
+                  className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] duration-100 rounded"
+                  onClick={handleLinkClick}
+                >
+                  Add GeoNote
                 </Link>
               </li>
             </>
@@ -118,7 +118,7 @@ export default function Navbar({ user }) {
               <li>
                 <div
                   onClick={() => {
-                    loginToAddGeoNotesToast()
+                    loginToAddGeoNotesToast();
                     handleLinkClick();
                   }}
                   className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] duration-100 rounded"

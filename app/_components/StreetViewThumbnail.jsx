@@ -1,9 +1,4 @@
-// I think I can make this a server component... actually no bc it is a child of a client component
-// "use client";
-
-import React from 'react';
-
-function StreetViewThumbnail({ lat, lng, width, height, heading, pitch, zoom }) {
+export default function StreetViewThumbnail({ lat, lng, width, height, heading, pitch, zoom }) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_STREETVIEW_API_KEY;
 
   const imgUrl = `https://maps.googleapis.com/maps/api/streetview?size=${width}x${height}&location=${lat},${lng}&heading=${heading}&pitch=${pitch}&fov=${zoom}&key=${apiKey}`;
@@ -15,5 +10,3 @@ function StreetViewThumbnail({ lat, lng, width, height, heading, pitch, zoom }) 
     </a>
   );
 }
-
-export default StreetViewThumbnail;
