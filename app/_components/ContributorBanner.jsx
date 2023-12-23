@@ -29,7 +29,7 @@ export default function ContributorBanner() {
 
   return (
     <div
-      className={`relative m-4 p-2 bg-green-300 rounded-lg transition-opacity duration-100 ${
+      className={`relative my-4 mx-auto p-2 bg-green-300 rounded-lg transition-opacity duration-100 w-fit ${
         isFadingOut ? 'opacity-0' : 'opacity-100'
       }`}
     >
@@ -37,7 +37,7 @@ export default function ContributorBanner() {
         onClick={handleClose}
         className="absolute -top-2 -right-2 text-[rgba(0,0,0,0.7)] hover:text-[rgba(0,0,0,0.5)] font-bold"
       >
-        <HighlightOffIcon className="bg-gray-100 rounded-2xl" />
+        <HighlightOffIcon className="bg-white rounded-2xl" />
       </button>
       <p className="text-black text-md tracking-tighter font-semibold">
         GeoNotes.io is looking for open source contributors 💻 If you are interested in helping build the site, visit

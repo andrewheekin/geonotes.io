@@ -9,7 +9,7 @@ import SettingsIcon from '@mui/icons-material/Settings'; // or NewReleasesIcon i
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 export default function PostFilter() {
-  const [displayType, setDisplayType] = useState('list');
+  const [displayType, setDisplayType] = useState('');
   const [postSortType, setPostSortType] = useState('hot');
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -35,7 +35,26 @@ export default function PostFilter() {
     replace(newParams);
   };
 
-  const buttonBaseClass = 'text-black text-sm font-bold py-1 px-2 rounded-xl';
+  // Initialize the displayType and postSortType from the URL params (or fallback to defaults)
+  React.useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    const displayTypeParam = params.get('displayType');
+    const postSortTypeParam = params.get('postSortType');
+
+    if (displayTypeParam) {
+      setDisplayType(displayTypeParam);
+    } else {
+      setDisplayType('list');
+    }
+
+    if (postSortTypeParam) {
+      setPostSortType(postSortTypeParam);
+    } else {
+      setPostSortType('hot');
+    }
+  }, []);
+
+  const buttonBaseClass = 'text-black text-sm font-bold py-1 px-2 rounded-xl active:bg-gray-300';
 
   return (
     <div className="flex justify-between items-center my-4 p-2 w-full rounded-lg bg-gray-200">

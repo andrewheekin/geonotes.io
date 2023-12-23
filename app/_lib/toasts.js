@@ -24,8 +24,8 @@ export default function GeoNotesToaster({ font }) {
       duration={1500}
       toastOptions={{
         classNames: {
-          title: `${font.className} text-lg tracking-tighter font-bold pt-2 px-4`,
-          description: `${font.className} text-md tracking-tight font-semibold py-2 px-4`,
+          title: `${font.className} text-xl md:text-lg tracking-tighter font-bold pt-2 px-4`,
+          description: `${font.className} text-lg md:text-md tracking-tight font-semibold py-2 px-4`,
           // toast?: string;
           // loader?: string;
           // closeButton?: string;

@@ -49,11 +49,10 @@ export default async function GeoNotesList({ searchParams }) {
                 <div style={{ marginTop: '10px' }}>
                   <Chip
                     label={note.country}
-                    style={{ marginRight: '5px', marginBottom: '5px', fontFamily: 'monospace' }}
+                    className="mr-1 mb-2"
                     avatar={
                       <Avatar
                         alt=""
-                        // variant='square'
                         src={`https://flagcdn.com/w80/${getCountryCode(note.country).toLowerCase()}.png`}
                       />
                     }
@@ -61,24 +60,11 @@ export default async function GeoNotesList({ searchParams }) {
                   {note.region &&
                     note.region.length > 0 &&
                     note.region.map((reg, index) => (
-                      <Chip
-                        key={index}
-                        label={reg}
-                        style={{
-                          marginRight: '5px',
-                          marginBottom: '5px',
-                          fontFamily: 'monospace',
-                          backgroundColor: 'rgb(214, 246, 214)',
-                        }}
-                      />
+                      <Chip className="mr-1 mb-2 bg-green-200" key={index} label={reg} />
                     ))}
                   {note.categories &&
                     note.categories.map((category, index) => (
-                      <Chip
-                        key={index}
-                        label={category}
-                        style={{ marginRight: '5px', marginBottom: '5px', fontFamily: 'monospace' }}
-                      />
+                      <Chip className="mr-1 mb-2" key={index} label={category} />
                     ))}
                   {note.author && (
                     <p className="text-gray-500 font-normal tracking-tight text-xs mb-2">added by {note.author}</p>
