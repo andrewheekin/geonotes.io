@@ -45,23 +45,28 @@ export default function PostFilter() {
     if (!isAuthenticated) {
       if (IS_MOBILE()) {
         setDisplayType('list');
+        params.set('displayType', 'list');
       } else {
         setDisplayType('grid');
+        params.set('displayType', 'grid');
       }
-      return;
+    } else {
+      // User is authenticated, set the displayType and postSortType from the URL params, or fallback to defaults (list and hot)
+      if (displayTypeParam) {
+        setDisplayType(displayTypeParam);
+      } else {
+        setDisplayType('list');
+        params.set('displayType', 'list');
+      }
+
+      if (postSortTypeParam) {
+        setPostSortType(postSortTypeParam);
+      } else {
+        setPostSortType('hot');
+      }
     }
 
-    if (displayTypeParam) {
-      setDisplayType(displayTypeParam);
-    } else {
-      setDisplayType('list');
-    }
-
-    if (postSortTypeParam) {
-      setPostSortType(postSortTypeParam);
-    } else {
-      setPostSortType('hot');
-    }
+    replace(`${pathname}?${params.toString()}`);
   }, []);
 
   const handleChangeDisplayType = (type) => {
