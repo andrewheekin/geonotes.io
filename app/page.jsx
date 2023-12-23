@@ -9,8 +9,8 @@ import HeroBanner from './_components/HeroBanner';
 export default async function Home({ searchParams }) {
   return (
     <div className="max-w-5xl w-full">
-      <HeroBanner />
       <ContributorBanner />
+      <HeroBanner />
       <OnlineIndicator />
       <GeoNoteSearch />
       <PostFilter />

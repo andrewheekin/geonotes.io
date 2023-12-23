@@ -14,6 +14,32 @@ export const loginToAddGeoNotesToast = () =>
     ),
   });
 
+export const loginToFilterGeoNotes = () =>
+  toast('Login to sort and filter GeoNotes!', {
+    description: (
+      <div className="font-semibold">
+        Please{' '}
+        <Link href="/login" className="underline">
+          log in
+        </Link>{' '}
+        to sort and filter GeoNotes
+      </div>
+    ),
+  });
+
+export const loginToSearchGeoNotes = () =>
+  toast('Login to search GeoNotes!', {
+    description: (
+      <div className="font-semibold">
+        Please{' '}
+        <Link href="/login" className="underline">
+          log in
+        </Link>{' '}
+        to search GeoNotes
+      </div>
+    ),
+  });
+
 export default function GeoNotesToaster({ font }) {
   return (
     <Toaster

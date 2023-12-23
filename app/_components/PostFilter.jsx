@@ -1,45 +1,55 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import SettingsIcon from '@mui/icons-material/Settings'; // or NewReleasesIcon if you prefer
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import { loginToFilterGeoNotes } from '../_lib/toasts';
+import { IS_MOBILE } from '../_lib/helpers';
 
 export default function PostFilter() {
+  const supabase = createClientComponentClient();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [displayType, setDisplayType] = useState('');
-  const [postSortType, setPostSortType] = useState('hot');
+  const [postSortType, setPostSortType] = useState('');
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleChangeDisplayType = (type) => {
-    setDisplayType(type);
-
-    // Update the URL params with the new displayType
-    const params = new URLSearchParams(searchParams);
-    params.set('displayType', type);
-    const newParams = `${pathname}?${params.toString()}`;
-    replace(newParams);
-  };
-
-  const handleChangePostSortType = (type) => {
-    setPostSortType(type);
-
-    // Update the URL params with the new postSortType
-    const params = new URLSearchParams(searchParams);
-    params.set('postSortType', type);
-    const newParams = `${pathname}?${params.toString()}`;
-    replace(newParams);
-  };
-
+  // async useEffect that checks if user is authenticated within a try catch block
   // Initialize the displayType and postSortType from the URL params (or fallback to defaults)
-  React.useEffect(() => {
+  useEffect(() => {
+    const checkIfAuthenticated = async () => {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (user) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+    checkIfAuthenticated();
+
     const params = new URLSearchParams(searchParams);
     const displayTypeParam = params.get('displayType');
     const postSortTypeParam = params.get('postSortType');
+
+    // If user is unauthenticated: set Desktop default to grid view, set Mobile default to list view
+    if (!isAuthenticated) {
+      if (IS_MOBILE()) {
+        setDisplayType('list');
+      } else {
+        setDisplayType('grid');
+      }
+      return;
+    }
 
     if (displayTypeParam) {
       setDisplayType(displayTypeParam);
@@ -53,6 +63,38 @@ export default function PostFilter() {
       setPostSortType('hot');
     }
   }, []);
+
+  const handleChangeDisplayType = (type) => {
+    // If user is unauthenticated, don't allow them to change the displayType and show the login toast
+    if (!isAuthenticated) {
+      loginToFilterGeoNotes();
+      return;
+    }
+
+    setDisplayType(type);
+
+    // Update the URL params with the new displayType
+    const params = new URLSearchParams(searchParams);
+    params.set('displayType', type);
+    const newParams = `${pathname}?${params.toString()}`;
+    replace(newParams);
+  };
+
+  const handleChangePostSortType = (type) => {
+    // If user is unauthenticated, don't allow them to change the postSortType and show the login toast
+    if (!isAuthenticated) {
+      loginToFilterGeoNotes();
+      return;
+    }
+
+    setPostSortType(type);
+
+    // Update the URL params with the new postSortType
+    const params = new URLSearchParams(searchParams);
+    params.set('postSortType', type);
+    const newParams = `${pathname}?${params.toString()}`;
+    replace(newParams);
+  };
 
   const buttonBaseClass = 'text-black text-sm font-bold py-1 px-2 rounded-xl active:bg-gray-300';
 

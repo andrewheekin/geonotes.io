@@ -6,7 +6,7 @@
 import { unstable_noStore as noStore } from 'next/cache';
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { NUM_INITIAL_GEONOTES } from './helpers';
+import { NUM_INITIAL_GEONOTES_AUTHENTICATED, NUM_INITIAL_GEONOTES_UNAUTHENTICATED } from './helpers';
 
 export async function fetchGeoNotes({ searchParams }) {
   noStore();
@@ -14,6 +14,9 @@ export async function fetchGeoNotes({ searchParams }) {
   console.log('searchParams in fetchGeoNotes', searchParams);
 
   /**
+   *
+   * If user is unathenticated, limit to fetching 8 geonotes, scrape all other searchParams off
+   *
    * If searchParams is empty, return all the GeoNotes
    *
    * Otherwise, return the GeoNotes that match the searchParams
@@ -28,11 +31,31 @@ export async function fetchGeoNotes({ searchParams }) {
   const cookieStore = cookies();
   const supabase = createServerActionClient({ cookies: () => cookieStore });
 
+  // Check user authentication
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user === null || user === undefined) {
+    console.log('In fetchGeoNotes, User is not authenticated');
+    // User is not authenticated, return 8 GeoNotes
+    const { data, error } = await supabase.from('geonote').select('*').limit(NUM_INITIAL_GEONOTES_UNAUTHENTICATED);
+
+    if (error) {
+      console.error('Database Error: ', error);
+      return {
+        message: 'Database Error: Failed to Fetch GeoNotes.',
+      };
+    }
+
+    return data;
+  }
+
   const hasCountries =
     Object.prototype.hasOwnProperty.call(searchParams, 'countries') && searchParams.countries.length > 0;
   const hasCategories =
     Object.prototype.hasOwnProperty.call(searchParams, 'categories') && searchParams.categories.length > 0;
-  const hasAuthor = Object.prototype.hasOwnProperty.call(searchParams, 'author') && searchParams.author.length > 0;
+  const hasAuthor = Object.prototype.hasOwnProperty.call(searchParams, 'author') && searchParams.author;
 
   let countries = [];
   let categories = [];
@@ -179,7 +202,7 @@ export async function fetchGeoNotes({ searchParams }) {
      *
      */
 
-    const { data, error } = await supabase.from('geonote').select('*').limit(NUM_INITIAL_GEONOTES);
+    const { data, error } = await supabase.from('geonote').select('*').limit(NUM_INITIAL_GEONOTES_AUTHENTICATED);
 
     if (error) {
       console.error('Database Error: ', error);

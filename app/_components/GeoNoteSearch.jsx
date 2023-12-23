@@ -1,10 +1,13 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import Select from 'react-select';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import CountriesList from '../_lib/CountriesList';
 import CategoriesList from '../_lib/CategoriesList';
 import RegionsList from '../_lib/RegionsList';
+import { loginToSearchGeoNotes } from '../_lib/toasts';
 
 const CountriesListOptions = CountriesList.map((country) => ({
   label: country.label,
@@ -25,17 +28,43 @@ const RegionsListOptions = RegionsList.map((region) => ({
 }));
 
 const groupedOptions = [
-  { label: 'Countries', options: CountriesListOptions },
   { label: 'Categories', options: CategoriesListOptions },
+  { label: 'Countries', options: CountriesListOptions },
   { label: 'Regions', options: RegionsListOptions },
 ];
 
 export default function GeoNoteSearch() {
+  const supabase = createClientComponentClient();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  // async useEffect that checks if user is authenticated within a try catch block
+  useEffect(() => {
+    const checkIfAuthenticated = async () => {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (user) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+    checkIfAuthenticated();
+  }, []);
+
   const handleChange = (selectedOptions) => {
+    console.log('isAuthenticated', isAuthenticated);
+    // If user is unauthenticated, don't allow them to change the search params and show the login toast
+    if (!isAuthenticated) {
+      loginToSearchGeoNotes();
+      return;
+    }
+
     // Split selected options by type
     const selectedCountries = selectedOptions.filter((option) => option.type === 'country');
     const selectedCategories = selectedOptions.filter((option) => option.type === 'category');

@@ -44,6 +44,13 @@ export async function middleware(req: NextRequest) {
       }
       return NextResponse.redirect(new URL('/login', req.url));
     }
+
+    if (req.nextUrl.pathname == '/account') {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Redirecting unauthenticated user from /account to /login');
+      }
+      return NextResponse.redirect(new URL('/login', req.url));
+    }
   }
 
   return res;
