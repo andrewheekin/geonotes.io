@@ -8,10 +8,130 @@ import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { NUM_INITIAL_GEONOTES_AUTHENTICATED, NUM_INITIAL_GEONOTES_UNAUTHENTICATED } from './helpers';
 
-export async function fetchGeoNotes({ searchParams }) {
+export async function voteOnGeoNote(geonoteId, voteType) {
   noStore();
 
-  console.log('searchParams in fetchGeoNotes', searchParams);
+  const cookieStore = cookies();
+  const supabase = createServerActionClient({ cookies: () => cookieStore });
+  const {
+    data: {
+      user: { id },
+    },
+  } = await supabase.auth.getUser();
+
+  // voteType is either: 'upvote', 'downvote', or 'neutral'
+  let voteValue = 0;
+  if (voteType === 'upvote') {
+    voteValue = 1;
+  } else if (voteType === 'downvote') {
+    voteValue = -1;
+  }
+
+  try {
+    // If voteValue is 0, delete vote record from geonote_vote
+    if (voteValue === 0) {
+      let { error: removeVoteRecordError } = await supabase
+        .from('geonote_vote')
+        .delete()
+        .eq('geonote_id', geonoteId)
+        .eq('user_id', id);
+
+      if (removeVoteRecordError) throw removeVoteRecordError;
+    } else {
+      // If voteValue is 1 or -1, upsert vote in geonote_vote
+      let { error } = await supabase.from('geonote_vote').upsert({
+        geonote_id: geonoteId,
+        user_id: id,
+        vote: voteValue,
+        created_at: new Date(),
+      });
+      if (error) throw error;
+    }
+  } catch (error) {
+    console.error('geonote_vote upsert error: ', error);
+    return { message: `Failed to ${voteType} GeoNote.` };
+  }
+
+  let voteCount = [];
+  try {
+    // Update the geonote record "upvotes" and "downvotes" columns
+    // Get the geonote_vote_count record for the geonote_id
+    let { data, error: voteCountError } = await supabase
+      .from('geonote_vote_count')
+      .select('*')
+      .eq('geonote_id', geonoteId);
+
+    voteCount = data;
+    if (voteCountError) throw voteCountError;
+  } catch (error) {
+    console.error('geonote_vote_count select error: ', error);
+    return { message: `Failed to ${voteType} GeoNote.` };
+  }
+
+  try {
+    // Now save the vote count from geonote_vote_count "upvotes" and "downvotes" columns to the geonote record
+    const updatedVotesObj = {
+      upvotes: parseInt(voteCount[0].upvotes),
+      downvotes: parseInt(voteCount[0].downvotes),
+    };
+
+    let { error } = await supabase.from('geonote').update(updatedVotesObj).eq('id', geonoteId);
+
+    if (error) throw error;
+
+    return { message: `Successfully ${voteType}d GeoNote.` };
+  } catch (error) {
+    console.error('geonote update error: ', error);
+    return { message: `Failed to ${voteType} GeoNote.` };
+  }
+}
+
+async function enrichGeoNotesWithVotes(userId, geonotes) {
+  /**
+   * If the user is authenticated, enrich the geoNotes in fetchGeoNotes with a “userVote” property
+   *
+   */
+
+  noStore();
+
+  const cookieStore = cookies();
+  const supabase = createServerActionClient({ cookies: () => cookieStore });
+
+  let enrichedGeoNotes = [];
+
+  // Get an array of geonote IDs
+  const geonoteIds = geonotes.map((geonote) => geonote.id);
+
+  // Fetch the votes for the geonotes from geonote_vote where user_id = userId and geonote_id in geonoteIds
+  const { data: votes, error: voteError } = await supabase
+    .from('geonote_vote')
+    .select('*')
+    .eq('user_id', userId)
+    .in('geonote_id', geonoteIds);
+
+  if (voteError) {
+    console.error('Database Error: ', voteError);
+    return {
+      message: 'Database Error: Failed to Fetch Votes.',
+    };
+  }
+
+  // Map the votes to the geonotes
+  enrichedGeoNotes = geonotes.map((geonote) => {
+    const vote = votes.find((vote) => vote.geonote_id === geonote.id);
+
+    if (vote) {
+      return { ...geonote, userVote: vote.vote };
+    } else {
+      return { ...geonote, userVote: 0 };
+    }
+  });
+
+  return enrichedGeoNotes;
+}
+
+export async function fetchGeoNotes({ searchParams }) {
+  noStore();
 
   /**
    *
@@ -88,7 +208,9 @@ export async function fetchGeoNotes({ searchParams }) {
       };
     }
 
-    return data;
+    // Enrich the GeoNotes with the user's votes
+    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
+    return enrichedGeoNotes;
   }
 
   if (hasCountries && hasCategories) {
@@ -135,16 +257,15 @@ export async function fetchGeoNotes({ searchParams }) {
       };
     }
 
-    return data;
+    // Enrich the GeoNotes with the user's votes
+    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
+    return enrichedGeoNotes;
   } else if (hasCountries) {
     /**
      * Case where only countries are provided
      */
     // Only countries filter is provided
-    const { data: countriesData, error: countriesError } = await supabase
-      .from('geonote')
-      .select('*')
-      .in('country', countries);
+    const { data, error: countriesError } = await supabase.from('geonote').select('*').in('country', countries);
 
     if (countriesError) {
       console.error('Database Error: ', countriesError);
@@ -153,7 +274,9 @@ export async function fetchGeoNotes({ searchParams }) {
       };
     }
 
-    return countriesData;
+    // Enrich the GeoNotes with the user's votes
+    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
+    return enrichedGeoNotes;
   } else if (hasCategories) {
     /**
      * Case where only categories are provided
@@ -183,10 +306,7 @@ export async function fetchGeoNotes({ searchParams }) {
       .filter(([_, categorySet]) => categories.every((cat) => categorySet.has(cat)))
       .map(([geonoteId, _]) => geonoteId);
 
-    const { data: categoryData, error: categoryError } = await supabase
-      .from('geonote')
-      .select('*')
-      .in('id', filteredGeonoteIds);
+    const { data, error: categoryError } = await supabase.from('geonote').select('*').in('id', filteredGeonoteIds);
 
     if (categoryError) {
       console.error('Database Error: ', categoryError);
@@ -194,8 +314,9 @@ export async function fetchGeoNotes({ searchParams }) {
         message: 'Database Error: Failed to Fetch GeoNotes.',
       };
     }
-
-    return categoryData;
+    // Enrich the GeoNotes with the user's votes
+    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
+    return enrichedGeoNotes;
   } else {
     /**
      * Case where No filters provided, return default set of GeoNotes
@@ -211,7 +332,9 @@ export async function fetchGeoNotes({ searchParams }) {
       };
     }
 
-    return data;
+    // Enrich the GeoNotes with the user's votes
+    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
+    return enrichedGeoNotes;
   }
 }
 

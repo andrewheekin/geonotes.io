@@ -70,12 +70,7 @@ export default function PostFilter() {
   }, []);
 
   const handleChangeDisplayType = (type) => {
-    // If user is unauthenticated, don't allow them to change the displayType and show the login toast
-    if (!isAuthenticated) {
-      loginToFilterGeoNotes();
-      return;
-    }
-
+    // If user is unauthenticated, DO STILL allow them to change the displayType
     setDisplayType(type);
 
     // Update the URL params with the new displayType

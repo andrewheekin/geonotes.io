@@ -26,8 +26,9 @@ export default function OnlineIndicator() {
   // Render "No internet" message when offline
   if (!isOnline) {
     return (
-      <div className="max-w-5xl w-full flex justify-center items-center my-8">
-        <p className="text-xl text-black font-semibold tracking-tighter">To use GeoNotes, please connect to the internet 🛜</p>
+      <div className="max-w-5xl flex justify-center items-center my-8 p-4 bg-gray-100 rounded-md">
+        <p className="text-xl text-black font-semibold tracking-tighter">⚠️</p>
+        <p className="text-xl text-black font-semibold tracking-tighter">To use GeoNotes, please connect to the internet</p>
       </div>
     );
   }

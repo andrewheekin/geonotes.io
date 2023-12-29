@@ -38,7 +38,7 @@ export default function HeroBanner() {
   }
 
   // Conditional classes for fade-out effect
-  const bannerClasses = `relative w-full py-20 my-4 md:mb-10 bg-[rgba(0,0,0,0.1)] rounded-md transition-opacity duration-${FADE_DURATION} ${
+  const bannerClasses = `relative w-full pt-8 pb-14 my-4 md:mb-10 bg-[rgba(0,0,0,0.1)] rounded-md transition-opacity duration-${FADE_DURATION} ${
     isFadingOut ? 'opacity-0' : 'opacity-100'
   }`;
 
@@ -50,7 +50,7 @@ export default function HeroBanner() {
       >
         <HighlightOffIcon className="bg-white rounded-2xl" />
       </button>
-      <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+      <div className="hidden sm:mb-6 sm:flex sm:justify-center">
         <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
           Learn locations around the world with GeoNotes.{' '}
           <Link href="/account" className="font-semibold text-cyan-600">
@@ -60,8 +60,8 @@ export default function HeroBanner() {
         </div>
       </div>
       <div className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Learn the world with GeoNotes</h1>
-        <p className="mt-6 max-w-xl mx-auto text-lg leading-8 text-gray-600">
+        <div className="text-3xl font-bold tracking-tight text-gray-900">Learn the world with GeoNotes</div>
+        <p className="mt-4 max-w-xl mx-auto text-md leading-8 text-gray-600">
           Share information about the world around you. GeoNotes is a community-driven platform for sharing knowledge.
         </p>
       </div>
