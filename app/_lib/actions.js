@@ -179,13 +179,20 @@ export async function fetchGeoNotes({ searchParams }) {
   const hasCategories =
     Object.prototype.hasOwnProperty.call(searchParams, 'categories') && searchParams.categories.length > 0;
   const hasAuthor = Object.prototype.hasOwnProperty.call(searchParams, 'author') && searchParams.author;
+  const hasRegions = Object.prototype.hasOwnProperty.call(searchParams, 'regions') && searchParams.regions.length > 0;
+  const hasPostSortType = Object.prototype.hasOwnProperty.call(searchParams, 'postSortType') && searchParams.postSortType;
 
   let countries = [];
+  let regions = [];
   let categories = [];
+  let postSortType = '';
   let author = '';
 
   if (hasCountries) {
     countries = searchParams.countries.split(',');
+  }
+  if (hasRegions) {
+    regions = searchParams.regions.split(',');
   }
   if (hasCategories) {
     categories = searchParams.categories.split(',');
@@ -348,14 +355,14 @@ export async function createGeoNote(formData) {
   const supabase = createServerActionClient({ cookies: () => cookieStore });
   const {
     data: {
-      user: { id },
+      user: { id, email },
     },
   } = await supabase.auth.getUser();
 
   const { data, error } = await supabase.from('profiles').select('username').eq('id', id);
 
-  // Supabase returns results as an array, take the first element
-  const username = data[0].username;
+  // Supabase returns results as an array, take the first element. Default to the user's email if no username is set.
+  const username = data[0].username || email?.split('@')[0];
 
   const { title, description, categories, country, region, streetViewLink } = formData;
   const created_at = new Date();

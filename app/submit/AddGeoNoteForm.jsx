@@ -3,18 +3,21 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { createGeoNote } from '../_lib/actions';
 import countries from '../_lib/CountriesList';
 import regions from '../_lib/RegionsList';
 import categories from '../_lib/CategoriesList';
 
 export default function AddGeoNoteForm() {
+  const router = useRouter();
+
   // State variables for each form field
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [streetViewLink, setStreetViewLink] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [country, setCountry] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedRegions, setSelectedRegions] = useState([]);
 
   // Handle form submission
@@ -25,25 +28,32 @@ export default function AddGeoNoteForm() {
       description,
       streetViewLink,
       categories: selectedCategories,
-      country,
+      country: selectedCountry,
       region: selectedRegions,
     };
     createGeoNote(formData);
+
+    // Route user to the homepage with Next.js router
+    router.push('/account');
   };
 
   // Handlers for each form field
+  const handleCountryChange = (selectedOption) => {
+    console.log('country selectedOptions: ', selectedOption);
+    setSelectedCountry(selectedOption.value);
+  };
+  const selectedCountryObject = countries.filter((country) => selectedCountry.includes(country.value));
+
   const handleCategoryChange = (selectedOptions) => {
     const chosen = selectedOptions.map((option) => option.value);
     setSelectedCategories(chosen);
   };
-
   const selectedCategoryObjects = categories.filter((category) => selectedCategories.includes(category.value));
 
   const handleRegionChange = (selectedOptions) => {
     const chosen = selectedOptions.map((option) => option.value);
     setSelectedRegions(chosen);
   };
-
   const selectedRegionObjects = regions.filter((region) => selectedRegions.includes(region.value));
 
   return (
@@ -104,6 +114,7 @@ export default function AddGeoNoteForm() {
           <Select
             options={categories}
             isMulti
+            required
             placeholder="Pick categories..."
             onChange={handleCategoryChange}
             value={selectedCategoryObjects}
@@ -125,20 +136,20 @@ export default function AddGeoNoteForm() {
           <label htmlFor="country" className="mb-2 block text-sm font-medium">
             Country*
           </label>
-          <select
-            id="country"
-            name="country"
+          <Select
+            options={countries}
             required
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
-          >
-            {countries.map((country, idx) => (
-              <option key={idx} value={country.value}>
-                {country.label}
-              </option>
-            ))}
-          </select>
+            placeholder="Pick country..."
+            onChange={handleCountryChange}
+            value={selectedCountryObject}
+            classNames={{
+              container: (state) => 'w-full',
+              control: (state) => 'border-gray-400 p-1 rounded-lg',
+              // option: (state) => 'bg-transparent hover:bg-gray-100',
+              menu: (state) => 'bg-gray-100 rounded-lg',
+              placeholder: (state) => 'text-sm tracking-tight font-normal',
+            }}
+          />
         </div>
 
         {/* Region */}

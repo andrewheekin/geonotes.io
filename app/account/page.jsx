@@ -8,7 +8,7 @@ export default async function Account() {
   return (
     <div className="max-w-3xl w-full py-2">
       <AccountForm session={session} />
-      <h1 className="text-2xl font-bold text-black mt-6 mb-2">Your GeoNotes</h1>
+      <h1 className="text-2xl font-bold text-black mt-8 mb-2">Your GeoNotes</h1>
       <GeoNotesList searchParams={{ author: session?.user?.id }} />
     </div>
   );

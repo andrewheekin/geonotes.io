@@ -74,12 +74,14 @@ export default function AccountForm({ session }) {
         <input
           id="username"
           type="text"
+          placeholder="Your username"
           value={username || ''}
           onChange={(e) => setUsername(e.target.value)}
-          className="text-2xl font-bold text-black bg-transparent"
+          className="text-2xl font-bold text-black bg-[rgba(0,0,0,0.05)] rounded-sm"
         />
       </div>
-      <div>
+      <div className="flex mb-4 mt-2">
+        <div className="text-md font-bold text-black mr-1">Email:</div>
         <input
           id="email"
           type="text"
@@ -88,7 +90,8 @@ export default function AccountForm({ session }) {
           className="text-md font-bold text-black w-full"
         />
       </div>
-      <div>
+      {/* Hide name field for now */}
+      {/* <div>
         <input
           id="fullName"
           type="text"
@@ -96,7 +99,7 @@ export default function AccountForm({ session }) {
           onChange={(e) => setFullname(e.target.value)}
           className="text-md font-bold text-black w-full bg-transparent"
         />
-      </div>
+      </div> */}
 
       {/* Hide website field for now, TODO: determine what to do with this field */}
       {/* <div>
@@ -116,17 +119,17 @@ export default function AccountForm({ session }) {
 
       <div>
         <button
-          className="button primary block underline"
+          className="button primary block p-2 my-2 mr-2 bg-gray-300 rounded-md text-md font-semibold hover:bg-gray-200 border-2 border-gray-400"
           onClick={() => updateProfile({ fullname, username, website, avatar_url })}
           disabled={loading}
         >
-          {loading ? 'Loading ...' : 'Update'}
+          {loading ? 'Loading ...' : 'Update profile'}
         </button>
       </div>
 
       <div>
         <form action="/auth/signout" method="GET">
-          <button className="button block underline" type="submit">
+          <button className="button primary block p-2 my-2 mr-2 bg-blue-400 rounded-md text-md font-semibold hover:bg-blue-300" type="submit">
             Sign out
           </button>
         </form>
