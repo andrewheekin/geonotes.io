@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import GeoNotesList from './_components/GeoNotesList';
 import OnlineIndicator from './_components/OnlineIndicator';
 import ContributorBanner from './_components/ContributorBanner';
@@ -14,9 +13,7 @@ export default async function Home({ searchParams }) {
       <OnlineIndicator />
       <GeoNoteSearch />
       <PostFilter />
-      <Suspense fallback={null}>
-        <GeoNotesList searchParams={searchParams} />
-      </Suspense>
+      <GeoNotesList searchParams={searchParams} />
     </div>
   );
 }

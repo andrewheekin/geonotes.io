@@ -105,6 +105,7 @@ export default function GeoNoteSearch() {
   return (
     <div className="flex flex-row mb-4 mt-2 w-full">
       <Select
+        instanceId="8z7h1o" // added to prevent Next.js hydration error: https://github.com/JedWatson/react-select/issues/5459
         options={groupedOptions}
         value={selectedOptionObjects}
         placeholder="Search countries, categories, regions..."

@@ -112,6 +112,7 @@ export default function AddGeoNoteForm() {
             Categories*
           </label>
           <Select
+            instanceId="wo17xk" // added to prevent Next.js hydration error: https://github.com/JedWatson/react-select/issues/5459
             options={categories}
             isMulti
             required
@@ -137,6 +138,7 @@ export default function AddGeoNoteForm() {
             Country*
           </label>
           <Select
+            instanceId="2iu1iu" // added to prevent Next.js hydration error: https://github.com/JedWatson/react-select/issues/5459
             options={countries}
             required
             placeholder="Pick country..."
@@ -158,6 +160,7 @@ export default function AddGeoNoteForm() {
             Region (optional)
           </label>
           <Select
+            instanceId="xcj28j" // added to prevent Next.js hydration error: https://github.com/JedWatson/react-select/issues/5459
             options={regions}
             isMulti
             placeholder="Pick regions..."
