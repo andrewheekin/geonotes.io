@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import Select from 'react-select';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 import CountriesList from '../_lib/CountriesList';
 import CategoriesList from '../_lib/CategoriesList';
 import RegionsList from '../_lib/RegionsList';
@@ -58,12 +59,16 @@ export default function GeoNoteSearch() {
   }, []);
 
   const handleChange = (selectedOptions) => {
-    console.log('isAuthenticated', isAuthenticated);
-    // If user is unauthenticated, don't allow them to change the search params and show the login toast
-    if (!isAuthenticated) {
-      loginToSearchGeoNotes();
-      return;
-    }
+    // ALLOW UNLIMITED SEARCHING FOR UNAUTHENTICATED USERS
+    // If user is unauthenticated, allow them to search N times then show the login toast
+    // if (!isAuthenticated) {
+    //   const unauthenticatedSearchCount = parseInt(Cookies.get('unauthenticatedSearchCount') || '0');
+    //   if (unauthenticatedSearchCount >= 30) {
+    //     loginToSearchGeoNotes();
+    //     return;
+    //   }
+    //   Cookies.set('unauthenticatedSearchCount', unauthenticatedSearchCount + 1, { expires: 14 });
+    // }
 
     // Split selected options by type
     const selectedCountries = selectedOptions.filter((option) => option.type === 'country');

@@ -160,19 +160,19 @@ export async function fetchGeoNotes({ searchParams }) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (user === null || user === undefined) {
-    // User is not authenticated, return 8 GeoNotes
-    const { data, error } = await supabase.from('geonote').select('*').limit(NUM_INITIAL_GEONOTES_UNAUTHENTICATED);
+  // if (user === null || user === undefined) {
+  //   // User is not authenticated, return 8 GeoNotes
+  //   const { data, error } = await supabase.from('geonote').select('*').limit(NUM_INITIAL_GEONOTES_UNAUTHENTICATED);
 
-    if (error) {
-      console.error('Database Error: ', error);
-      return {
-        message: 'Database Error: Failed to Fetch GeoNotes.',
-      };
-    }
+  //   if (error) {
+  //     console.error('Database Error: ', error);
+  //     return {
+  //       message: 'Database Error: Failed to Fetch GeoNotes.',
+  //     };
+  //   }
 
-    return data;
-  }
+  //   return data;
+  // }
 
   const hasCountries =
     Object.prototype.hasOwnProperty.call(searchParams, 'countries') && searchParams.countries.length > 0;
@@ -180,7 +180,8 @@ export async function fetchGeoNotes({ searchParams }) {
     Object.prototype.hasOwnProperty.call(searchParams, 'categories') && searchParams.categories.length > 0;
   const hasAuthor = Object.prototype.hasOwnProperty.call(searchParams, 'author') && searchParams.author;
   const hasRegions = Object.prototype.hasOwnProperty.call(searchParams, 'regions') && searchParams.regions.length > 0;
-  const hasPostSortType = Object.prototype.hasOwnProperty.call(searchParams, 'postSortType') && searchParams.postSortType;
+  const hasPostSortType =
+    Object.prototype.hasOwnProperty.call(searchParams, 'postSortType') && searchParams.postSortType;
 
   let countries = [];
   let regions = [];
@@ -218,9 +219,13 @@ export async function fetchGeoNotes({ searchParams }) {
       };
     }
 
-    // Enrich the GeoNotes with the user's votes
-    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
-    return enrichedGeoNotes;
+    if (user === null || user === undefined) {
+      return data;
+    } else {
+      // Enrich the GeoNotes with the user's votes
+      const enrichedGeoNotes = await enrichGeoNotesWithVotes(user?.id, data);
+      return enrichedGeoNotes;
+    }
   }
 
   if (hasCountries && hasCategories) {
@@ -267,9 +272,13 @@ export async function fetchGeoNotes({ searchParams }) {
       };
     }
 
-    // Enrich the GeoNotes with the user's votes
-    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
-    return enrichedGeoNotes;
+    if (user === null || user === undefined) {
+      return data;
+    } else {
+      // Enrich the GeoNotes with the user's votes
+      const enrichedGeoNotes = await enrichGeoNotesWithVotes(user?.id, data);
+      return enrichedGeoNotes;
+    }
   } else if (hasCountries) {
     /**
      * Case where only countries are provided
@@ -284,9 +293,13 @@ export async function fetchGeoNotes({ searchParams }) {
       };
     }
 
-    // Enrich the GeoNotes with the user's votes
-    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
-    return enrichedGeoNotes;
+    if (user === null || user === undefined) {
+      return data;
+    } else {
+      // Enrich the GeoNotes with the user's votes
+      const enrichedGeoNotes = await enrichGeoNotesWithVotes(user?.id, data);
+      return enrichedGeoNotes;
+    }
   } else if (hasCategories) {
     /**
      * Case where only categories are provided
@@ -324,9 +337,14 @@ export async function fetchGeoNotes({ searchParams }) {
         message: 'Database Error: Failed to Fetch GeoNotes.',
       };
     }
-    // Enrich the GeoNotes with the user's votes
-    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
-    return enrichedGeoNotes;
+
+    if (user === null || user === undefined) {
+      return data;
+    } else {
+      // Enrich the GeoNotes with the user's votes
+      const enrichedGeoNotes = await enrichGeoNotesWithVotes(user?.id, data);
+      return enrichedGeoNotes;
+    }
   } else {
     /**
      * Case where No filters provided, return default set of GeoNotes
@@ -342,9 +360,13 @@ export async function fetchGeoNotes({ searchParams }) {
       };
     }
 
-    // Enrich the GeoNotes with the user's votes
-    const enrichedGeoNotes = await enrichGeoNotesWithVotes(user.id, data);
-    return enrichedGeoNotes;
+    if (user === null || user === undefined) {
+      return data;
+    } else {
+      // Enrich the GeoNotes with the user's votes
+      const enrichedGeoNotes = await enrichGeoNotesWithVotes(user?.id, data);
+      return enrichedGeoNotes;
+    }
   }
 }
 
