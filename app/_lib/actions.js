@@ -13,11 +13,16 @@ export async function voteOnGeoNote(geonoteId, voteType) {
 
   const cookieStore = cookies();
   const supabase = createServerActionClient({ cookies: () => cookieStore });
+
+  // Check user authentication
   const {
-    data: {
-      user: { id },
-    },
+    data: { user },
   } = await supabase.auth.getUser();
+
+  if (user === null || user === undefined) {
+    return { message: 'User is not authenticated.' };
+  }
+  const { id } = user;
 
   // voteType is either: 'upvote', 'downvote', or 'neutral'
   let voteValue = 0;
@@ -89,7 +94,6 @@ export async function voteOnGeoNote(geonoteId, voteType) {
 async function enrichGeoNotesWithVotes(userId, geonotes) {
   /**
    * If the user is authenticated, enrich the geoNotes in fetchGeoNotes with a “userVote” property
-   *
    */
 
   noStore();
@@ -157,7 +161,6 @@ export async function fetchGeoNotes({ searchParams }) {
   } = await supabase.auth.getUser();
 
   if (user === null || user === undefined) {
-    console.log('In fetchGeoNotes, User is not authenticated');
     // User is not authenticated, return 8 GeoNotes
     const { data, error } = await supabase.from('geonote').select('*').limit(NUM_INITIAL_GEONOTES_UNAUTHENTICATED);
 

@@ -62,7 +62,7 @@ export default function HeroBanner() {
       <div className="text-center">
         <div className="text-3xl font-bold tracking-tight text-gray-900">Learn the world with GeoNotes</div>
         <p className="mt-4 max-w-xl mx-auto text-md leading-8 text-gray-600">
-          Share information about the world around you. GeoNotes is a community-driven platform for sharing knowledge.
+          GeoNotes.io is the open source platform for community-contributed Street View notes
         </p>
       </div>
     </div>

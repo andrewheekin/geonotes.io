@@ -5,8 +5,6 @@ import GeoNoteCard from './GeoNoteCard';
 export default async function GeoNotesList({ searchParams }) {
   const geoNotes = await fetchGeoNotes({ searchParams });
 
-  // console.log('geoNotes', geoNotes);
-
   const createMissingGeoNoteText = (searchParams) => {
     const hasCountries =
       Object.prototype.hasOwnProperty.call(searchParams, 'countries') && searchParams.countries.length > 0;

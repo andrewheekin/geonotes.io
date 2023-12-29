@@ -7,7 +7,7 @@ export default function About() {
         <a href="https://www.geoguessr.com/user/5f0524fe657099387000f26e" className="underline">
           @geoheek
         </a>{' '}
-        to help share tips about Google Street View clues from around the 🌎. (GeoNotes is not affiliated with
+        to help share tips about Google Street View clues from around the 🌎 (GeoNotes is not affiliated with
         GeoGuessr)
       </p>
       <p className="text-md text-black font-medium tracking-tight my-2 py-2 rounded-md">
