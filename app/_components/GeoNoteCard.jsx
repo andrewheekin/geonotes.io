@@ -13,7 +13,7 @@ import StreetViewThumbnail from './StreetViewThumbnail';
 
 export default function GeoNoteCard({ note }) {
   // Set the initial vote status based on the user's vote
-  const initialVoteStatus = { upvoted: note.userVote === 1, downvoted: note.userVote === -1 };
+  const initialVoteStatus = { upvoted: note.userVote > 0, downvoted: note.userVote < 0 };
   const [voteStatus, setVoteStatus] = useState(initialVoteStatus);
 
   // Set the initial vote count based on the note's upvotes minus downvotes
@@ -22,7 +22,7 @@ export default function GeoNoteCard({ note }) {
 
   const debouncedVoteHandler = debounce(async (geonoteId, voteType) => {
     const res = await voteOnGeoNote(geonoteId, voteType);
-  }, 1000);
+  }, 500);
 
   const handleVoteClick = (voteClick) => {
     if (voteClick === 'REMOVE_UPVOTE') {
