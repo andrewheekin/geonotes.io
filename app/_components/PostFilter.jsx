@@ -96,7 +96,7 @@ export default function PostFilter() {
     replace(newParams);
   };
 
-  const buttonBaseClass = 'text-black text-sm font-bold py-1 px-2 rounded-xl active:bg-gray-300';
+  const buttonBaseClass = 'text-black text-sm font-mono font-bold py-1 px-2 rounded-xl active:bg-gray-300';
 
   return (
     <div className="flex justify-between items-center my-4 p-2 w-full rounded-lg bg-gray-200">

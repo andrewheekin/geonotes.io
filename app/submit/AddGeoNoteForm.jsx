@@ -61,7 +61,7 @@ export default function AddGeoNoteForm() {
       <div className="rounded-lg p-4 md:py-6 bg-sky-100">
         {/* Title */}
         <div className="mb-4">
-          <label htmlFor="title" className="mb-2 block text-sm font-medium">
+          <label htmlFor="title" className="mb-2 block text-sm font-mono font-medium">
             Title*
           </label>
           <input
@@ -71,13 +71,13 @@ export default function AddGeoNoteForm() {
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
+            className="w-full rounded-md border border-gray-200 p-2 font-mono text-sm"
           />
         </div>
 
         {/* Description */}
         <div className="mb-4">
-          <label htmlFor="description" className="mb-2 block text-sm font-medium">
+          <label htmlFor="description" className="mb-2 block text-sm font-mono font-medium">
             Description*
           </label>
           <textarea
@@ -86,13 +86,13 @@ export default function AddGeoNoteForm() {
             required
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
+            className="w-full rounded-md border border-gray-200 p-2 font-mono text-sm"
           ></textarea>
         </div>
 
         {/* Street View Link */}
         <div className="mb-4">
-          <label htmlFor="streetViewLink" className="mb-2 block text-sm font-medium">
+          <label htmlFor="streetViewLink" className="mb-2 block text-sm font-mono font-medium">
             Street View Link*
           </label>
           <input
@@ -102,13 +102,13 @@ export default function AddGeoNoteForm() {
             required
             value={streetViewLink}
             onChange={(e) => setStreetViewLink(e.target.value)}
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
+            className="w-full rounded-md border border-gray-200 p-2 font-mono text-sm"
           />
         </div>
 
         {/* Categories */}
         <div className="mb-4">
-          <label htmlFor="categories" className="mb-2 block text-sm font-medium">
+          <label htmlFor="categories" className="mb-2 block text-sm font-mono font-medium">
             Categories*
           </label>
           <Select
@@ -120,11 +120,11 @@ export default function AddGeoNoteForm() {
             onChange={handleCategoryChange}
             value={selectedCategoryObjects}
             classNames={{
-              container: (state) => 'w-full',
+              container: (state) => 'w-full font-mono',
               control: (state) => 'border-gray-400 p-1 rounded-lg',
               // option: (state) => 'bg-transparent hover:bg-gray-100',
               menu: (state) => 'bg-gray-100 rounded-lg',
-              placeholder: (state) => 'text-sm tracking-tight font-normal',
+              placeholder: (state) => 'text-sm tracking-tight font-mono font-normal',
               multiValue: (state) => 'text-lg tracking-tight bg-gray-300 rounded-2xl px-2 py-0',
               multiValueRemove: (state) =>
                 'text-xl tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800',
@@ -134,7 +134,7 @@ export default function AddGeoNoteForm() {
 
         {/* Country */}
         <div className="mb-4">
-          <label htmlFor="country" className="mb-2 block text-sm font-medium">
+          <label htmlFor="country" className="mb-2 block text-sm font-mono font-medium">
             Country*
           </label>
           <Select
@@ -145,18 +145,18 @@ export default function AddGeoNoteForm() {
             onChange={handleCountryChange}
             value={selectedCountryObject}
             classNames={{
-              container: (state) => 'w-full',
+              container: (state) => 'w-full font-mono',
               control: (state) => 'border-gray-400 p-1 rounded-lg',
               // option: (state) => 'bg-transparent hover:bg-gray-100',
               menu: (state) => 'bg-gray-100 rounded-lg',
-              placeholder: (state) => 'text-sm tracking-tight font-normal',
+              placeholder: (state) => 'text-sm tracking-tight font-mono font-normal',
             }}
           />
         </div>
 
         {/* Region */}
         <div className="mb-4">
-          <label htmlFor="region" className="mb-2 block text-sm font-medium">
+          <label htmlFor="region" className="mb-2 block text-sm font-mono font-medium">
             Region (optional)
           </label>
           <Select
@@ -167,12 +167,12 @@ export default function AddGeoNoteForm() {
             onChange={handleRegionChange}
             value={selectedRegionObjects}
             classNames={{
-              container: (state) => 'w-full',
+              container: (state) => 'w-full font-mono',
               control: (state) => 'border-gray-400 p-1 rounded-lg',
               // option: (state) => 'bg-transparent hover:bg-gray-100',
               menu: (state) => 'bg-gray-100 rounded-lg',
-              placeholder: (state) => 'text-sm tracking-tight font-normal',
-              multiValue: (state) => 'text-lg tracking-tight bg-gray-300 rounded-2xl px-2 py-0',
+              placeholder: (state) => 'text-sm tracking-tight font-mono font-normal',
+              multiValue: (state) => 'text-lg font-mono tracking-tight bg-gray-300 rounded-2xl px-2 py-0',
               multiValueRemove: (state) =>
                 'text-xl tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800',
             }}
@@ -183,13 +183,13 @@ export default function AddGeoNoteForm() {
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/"
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-mono font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
           Cancel
         </Link>
         <button
           type="submit"
-          className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
+          className="flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-mono font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
         >
           Add GeoNote
         </button>

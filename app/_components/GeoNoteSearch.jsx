@@ -112,14 +112,14 @@ export default function GeoNoteSearch() {
         onChange={handleChange}
         isMulti
         classNames={{
-          container: () => 'w-full',
+          container: () => 'w-full font-mono',
           control: () => 'border-2 border-gray-400 hover:border-gray-500 bg-transparent p-2 rounded-lg',
           option: () => 'bg-transparent hover:bg-gray-200 duration-100  font-semibold',
           menu: () => 'bg-gray-100 rounded-lg',
-          placeholder: () => 'text-md tracking-tight font-semibold',
-          multiValue: () => 'text-lg tracking-tight font-semibold bg-gray-300 rounded-2xl px-2 py-1',
+          placeholder: () => 'text-md tracking-tight font-mono font-semibold',
+          multiValue: () => 'text-lg tracking-tight font-mono font-semibold bg-gray-300 rounded-2xl px-2 py-1',
           multiValueRemove: () =>
-            'text-xl tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800 duration-100',
+            'text-xl font-mono tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800 duration-100',
         }}
       />
     </div>

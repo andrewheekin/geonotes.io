@@ -92,22 +92,22 @@ export default function GeoNoteCard({ note }) {
       </div>
       <div className="p-2 md:p-3">
         <div className="pr-7">
-          <p className="text-xl text-black font-semibold tracking-tighter">{note.title}</p>
-          <p className="text-sm text-black font-medium tracking-tight">{note.description}</p>
+          <p className="text-xl text-black font-mono font-semibold tracking-tighter">{note.title}</p>
+          <p className="text-sm text-black font-mono font-medium tracking-tight">{note.description}</p>
         </div>
         <div style={{ marginTop: '10px' }}>
           <Chip
             label={note.country}
-            className="mr-1 mb-2"
+            className="mr-1 mb-2 font-mono"
             avatar={<Avatar alt="" src={`https://flagcdn.com/w80/${getCountryCode(note.country).toLowerCase()}.png`} />}
           />
           {note.region &&
             note.region.length > 0 &&
-            note.region.map((reg, index) => <Chip className="mr-1 mb-2 bg-green-200" key={index} label={reg} />)}
+            note.region.map((reg, index) => <Chip className="mr-1 mb-2 bg-green-200 font-mono" key={index} label={reg} />)}
           {note.categories &&
-            note.categories.map((category, index) => <Chip className="mr-1 mb-2" key={index} label={category} />)}
+            note.categories.map((category, index) => <Chip className="mr-1 mb-2 font-mono" key={index} label={category} />)}
           {note.author && (
-            <p className="text-gray-500 font-normal tracking-tight text-xs mb-2">added by {note.author}</p>
+            <p className="text-gray-500 font-mono font-normal tracking-tight text-xs mb-2">added by {note.author}</p>
           )}
         </div>
         <StreetViewThumbnail
