@@ -6,6 +6,12 @@ import Cookies from 'js-cookie';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const FADE_DURATION = 200;
+// Number of times the banner can be closed before it is hidden forever
+const HERO_BANNER_CLOSE_COUNT = 1;
+// Version of the banner, used to set the cookie name
+const HERO_BANNER_VERSION = 1;
+// Cookie name is based on the version of the banner
+const HERO_BANNER_COOKIE_NAME = `heroBannerCloseCount_v${HERO_BANNER_VERSION}`;
 
 export default function HeroBanner() {
   const [isVisible, setIsVisible] = useState(true);
@@ -14,8 +20,8 @@ export default function HeroBanner() {
 
   useEffect(() => {
     // Check if the banner has been closed in the past and how many times
-    const bannerCloseCount = parseInt(Cookies.get('heroBannerCloseCount') || '0');
-    if (bannerCloseCount < 2) {
+    const bannerCloseCount = parseInt(Cookies.get(HERO_BANNER_COOKIE_NAME) || '0');
+    if (bannerCloseCount < HERO_BANNER_CLOSE_COUNT) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
@@ -28,8 +34,8 @@ export default function HeroBanner() {
     setTimeout(() => {
       setIsVisible(false);
       // Increment the banner close count
-      const bannerCloseCount = parseInt(Cookies.get('heroBannerCloseCount') || '0');
-      Cookies.set('heroBannerCloseCount', bannerCloseCount + 1, { expires: 14 });
+      const bannerCloseCount = parseInt(Cookies.get(HERO_BANNER_COOKIE_NAME) || '0');
+      Cookies.set(HERO_BANNER_COOKIE_NAME, bannerCloseCount + 1, { expires: 365 });
     }, FADE_DURATION); // Set this to the duration of the fade-out
   };
 

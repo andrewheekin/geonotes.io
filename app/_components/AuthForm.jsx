@@ -37,7 +37,7 @@ export default function AuthForm() {
       supabaseClient={supabase}
       view="magic_link"
       showLinks={false}
-      providers={[]}
+      providers={['google']}
       redirectTo={redirectUrl} // Note, on Supabase this comes from the "Site URL" ("Auth" -> "URL Configuration") and not this variable
     />
   );
