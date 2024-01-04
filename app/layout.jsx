@@ -1,6 +1,7 @@
 import { Open_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { getUserSession } from './_lib/server-data';
+import Footer from './_components/Footer';
 import Navbar from './_components/Navbar';
 import Gradient from './_components/Gradient';
 import GeoNotesToaster from './_lib/toasts';
@@ -27,6 +28,7 @@ export default async function RootLayout({ children }) {
           <GeoNotesToaster font={open_sans} />
           {children}
         </main>
+        <Footer />
         <Analytics />
       </body>
     </html>
