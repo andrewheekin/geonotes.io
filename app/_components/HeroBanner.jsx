@@ -38,7 +38,7 @@ export default function HeroBanner() {
   }
 
   // Conditional classes for fade-out effect
-  const bannerClasses = `relative w-full pt-8 pb-14 my-4 md:mb-10 bg-[rgba(0,0,0,0.1)] rounded-md transition-opacity duration-${FADE_DURATION} ${
+  const bannerClasses = `relative w-full pt-4 pb-8 my-4 md:mb-10 bg-[rgba(0,0,0,0.1)] rounded-md transition-opacity duration-${FADE_DURATION} ${
     isFadingOut ? 'opacity-0' : 'opacity-100'
   }`;
 
@@ -51,7 +51,7 @@ export default function HeroBanner() {
         <HighlightOffIcon className="bg-white rounded-2xl" />
       </button>
       <div className="hidden sm:mb-6 sm:flex sm:justify-center">
-        <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+        <div className="relative rounded-full px-3 py-1 font-mono text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
           Learn locations around the world with GeoNotes.{' '}
           <Link href="/account" className="font-semibold text-cyan-600">
             <span className="absolute inset-0" aria-hidden="true" />
@@ -60,8 +60,8 @@ export default function HeroBanner() {
         </div>
       </div>
       <div className="text-center">
-        <div className="text-3xl font-bold tracking-tight text-gray-900">Learn the world with GeoNotes</div>
-        <p className="mt-4 max-w-xl mx-auto text-md leading-8 text-gray-600">
+        <div className="text-3xl font-mono font-bold tracking-tight text-gray-900">Welcome to GeoNotes</div>
+        <p className="mt-4 max-w-xl mx-auto font-mono text-md leading-8 text-gray-600">
           GeoNotes.io is the open source platform for community-contributed Street View notes
         </p>
       </div>

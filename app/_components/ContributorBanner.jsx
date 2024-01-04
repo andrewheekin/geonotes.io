@@ -41,7 +41,7 @@ export default function ContributorBanner() {
       >
         <HighlightOffIcon className="bg-white rounded-2xl" />
       </button>
-      <p className="text-black text-md font-normal">
+      <p className="text-black text-md font-mono font-normal">
         GeoNotes.io is looking for open source contributors 💻 If you are interested in helping build the site, visit
         our{' '}
         <a href="https://github.com/andrewheekin/geonotes.io/issues" className="text-cyan-600 underline">
