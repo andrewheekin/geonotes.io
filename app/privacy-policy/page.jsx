@@ -29,7 +29,7 @@ export default function PrivacyPolicy() {
         As a GeoNotes user, you have the right to view, update, or delete your personal information. You can manage your personal information through your account page on the GeoNotes app.
       </p>
 
-      <h2 className="text-xl font-semibold text-black mt-4">5. Policy on Children's Privacy</h2>
+      <h2 className="text-xl font-semibold text-black mt-4">5. Policy on Childrens Privacy</h2>
       <p className="text-md text-black font-medium tracking-tight my-2 py-2 rounded-md">
         GeoNotes does not allow sign-ups from users under the age of 16. We do not knowingly collect personal information from children under the age of consent in their jurisdiction.
       </p>
