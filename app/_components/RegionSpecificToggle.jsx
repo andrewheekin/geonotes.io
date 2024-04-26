@@ -12,7 +12,7 @@ export default function CheckboxLabels({ setShowRegionSpecific }) {
     <FormGroup>
       <FormControlLabel
         control={<Checkbox defaultChecked onChange={handleChange} />}
-        label={<p className="text-sm font-semibold text-black tracking-tight">show region-specific</p>}
+        label={<p className="text-sm font-semibold text-black dark:text-white tracking-tight">show region-specific</p>}
       />
     </FormGroup>
   );
