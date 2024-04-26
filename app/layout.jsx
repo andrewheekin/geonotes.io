@@ -1,6 +1,7 @@
 import { Open_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { getUserSession } from './_lib/server-data';
+import { ThemeProvider } from 'next-themes'
 import Footer from './_components/Footer';
 import Navbar from './_components/Navbar';
 import Gradient from './_components/Gradient';
@@ -22,7 +23,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={open_sans.className}>
-        <Gradient />
+      <ThemeProvider>
         <Navbar user={user} />
         <main className="flex flex-col items-center min-h-screen p-2 md:p-4">
           <GeoNotesToaster font={open_sans} />
@@ -30,6 +31,8 @@ export default async function RootLayout({ children }) {
         </main>
         <Footer />
         <Analytics />
+      </ThemeProvider>
+      <Gradient />
       </body>
     </html>
   );
