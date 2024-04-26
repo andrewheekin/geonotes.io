@@ -24,15 +24,15 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={open_sans.className}>
       <ThemeProvider>
-        <Navbar user={user} />
-        <main className="flex flex-col items-center min-h-screen p-2 md:p-4">
+          <Gradient />
+          <Navbar user={user} />
+          <main className="flex flex-col items-center min-h-screen p-2 md:p-4">
           <GeoNotesToaster font={open_sans} />
           {children}
         </main>
         <Footer />
         <Analytics />
       </ThemeProvider>
-      <Gradient />
       </body>
     </html>
   );
