@@ -4,11 +4,9 @@ import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import Select from 'react-select';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
 import CountriesList from '../_lib/CountriesList';
 import CategoriesList from '../_lib/CategoriesList';
 import RegionsList from '../_lib/RegionsList';
-import { loginToSearchGeoNotes } from '../_lib/toasts';
 
 const CountriesListOptions = CountriesList.map((country) => ({
   label: country.label,
@@ -113,13 +111,13 @@ export default function GeoNoteSearch() {
         isMulti
         classNames={{
           container: () => 'w-full font-mono',
-          control: () => 'border-2 border-gray-400 hover:border-gray-500 bg-transparent p-2 rounded-lg',
-          option: () => 'bg-transparent hover:bg-gray-200 duration-100  font-semibold',
-          menu: () => 'bg-gray-100 rounded-lg',
-          placeholder: () => 'text-md tracking-tight font-mono font-semibold',
-          multiValue: () => 'text-lg tracking-tight font-mono font-semibold bg-gray-300 rounded-2xl px-2 py-1',
+          control: () => 'border-2 border-gray-400 dark:border-gray-600 hover:border-gray-500 dark:hover:border-gray-800 bg-transparent p-2 rounded-lg',
+          option: () => 'bg-transparent hover:bg-gray-200 duration-100 font-semibold hover:bg-gray-200 dark:hover:bg-gray-700',
+          menu: () => 'bg-gray-100 dark:bg-gray-800 rounded-lg',
+          placeholder: () => 'text-md tracking-tight font-mono font-semibold dark:text-gray-300',
+          multiValue: () => 'text-lg tracking-tight font-mono font-semibold bg-gray-300 dark:bg-gray-700 rounded-2xl px-2 py-1',
           multiValueRemove: () =>
-            'text-xl font-mono tracking-tight bg-gray-300 px-2 py-0 rounded-2xl hover:bg-gray-400 hover:text-gray-800 duration-100',
+            'text-xl font-mono tracking-tight bg-gray-300 dark:bg-gray-700 px-2 py-0 rounded-2xl hover:bg-gray-400 dark:hover:bg-gray-600 hover:text-gray-800 duration-100',
         }}
       />
     </div>
