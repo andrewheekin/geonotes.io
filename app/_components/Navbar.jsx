@@ -22,7 +22,7 @@ export default function Navbar({ user }) {
       <div className="flex items-end">
         <Image src="globe.png" alt="Globe" width={30} height={30} unoptimized className="mr-2" />
         <Link href="/" className="flex flex-col">
-          <div className="text-2xl text-black font-bold tracking-tighter">GeoNotes</div>
+          <div className="text-2xl text-black dark:text-white font-bold tracking-tighter">GeoNotes</div>
         </Link>
       </div>
       <div className="md:hidden">
@@ -59,7 +59,7 @@ export default function Navbar({ user }) {
           <li>
             <Link
               href="https://github.com/andrewheekin/geonotes.io"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-300 font-semibold tracking-tight"
               onClick={handleLinkClick}
             >
               <GitHubIcon />
@@ -68,7 +68,7 @@ export default function Navbar({ user }) {
           <li>
             <Link
               href="/"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight px-2"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-300 font-semibold tracking-tight px-2"
               onClick={handleLinkClick}
             >
               Home
@@ -77,7 +77,7 @@ export default function Navbar({ user }) {
           <li>
             <Link
               href="/about"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight px-2"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-300 font-semibold tracking-tight px-2"
               onClick={handleLinkClick}
             >
               About
@@ -91,13 +91,13 @@ export default function Navbar({ user }) {
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2"
                   onClick={handleLinkClick}
                 >
-                  <div className="text-black hover:text-gray-500 font-semibold tracking-tight">Account</div>
+                  <div className="text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-300 font-semibold tracking-tight">Account</div>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/submit"
-                  className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] duration-100 rounded"
+                  className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black dark:text-white font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.1)] duration-100 rounded"
                   onClick={handleLinkClick}
                 >
                   Add GeoNote
@@ -112,7 +112,7 @@ export default function Navbar({ user }) {
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2"
                   onClick={handleLinkClick}
                 >
-                  <div className="text-black hover:text-gray-500 font-semibold tracking-tight">Login</div>
+                  <div className="text-black dark:text-white hover:text-gray-500 font-semibold tracking-tight">Login</div>
                 </Link>
               </li>
               <li>
@@ -121,7 +121,7 @@ export default function Navbar({ user }) {
                     loginToAddGeoNotesToast();
                     handleLinkClick();
                   }}
-                  className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] duration-100 rounded"
+                  className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black dark:text-white font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] duration-100 rounded"
                 >
                   Add GeoNote
                 </div>
