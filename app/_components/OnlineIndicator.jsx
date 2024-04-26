@@ -24,7 +24,7 @@ export default function OnlineIndicator() {
   }, []);
 
   // Render "No internet" message when offline
-  if (isOnline) {
+  if (!isOnline) {
     return (
       <div className="max-w-5xl flex justify-center items-center my-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-md">
         <p className="text-xl text-black dark:text-white font-semibold tracking-tighter">⚠️</p>
