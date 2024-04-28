@@ -59,9 +59,9 @@ export default function GeoNoteCard({ note }) {
   };
 
   return (
-    <div className="mb-4 border-4 border-black bg-gray-200 relative shadow rounded">
+    <div className="mb-4 border-4 border-black dark:border-gray-300 bg-gray-200 dark:bg-gray-700 relative shadow rounded">
       {note.region && note.region.length > 0 && (
-        <div className="absolute -top-3 left-2 rounded-lg bg-gray-300 border-1 border-gray-700 py-1 px-2">
+        <div className="absolute -top-3 left-2 rounded-lg bg-gray-300 dark:bg-gray-600 border-1 border-gray-700 py-1 px-2">
           <p className="text-xs text-gray font-semibold">regional</p>
         </div>
       )}
@@ -69,45 +69,45 @@ export default function GeoNoteCard({ note }) {
         {voteStatus.upvoted ? (
           // User removes their upvote
           <button onClick={() => handleVoteClick('REMOVE_UPVOTE')} className="focus:outline-none">
-            <UpvoteIcon />
+            <UpvoteIcon className="fill-black dark:fill-white"/>
           </button>
         ) : (
           // User upvotes
           <button onClick={() => handleVoteClick('ADD_UPVOTE')} className="focus:outline-none">
-            <UpvoteOutlineIcon />
+            <UpvoteOutlineIcon className="fill-black dark:fill-white"/>
           </button>
         )}
         <span className="text-sm font-semibold">{voteCount}</span>
         {voteStatus.downvoted ? (
           // User removes their downvote
           <button onClick={() => handleVoteClick('REMOVE_DOWNVOTE')} className="focus:outline-none">
-            <DownvoteIcon />
+            <DownvoteIcon className="fill-black dark:fill-white"/>
           </button>
         ) : (
           // User downvotes
           <button onClick={() => handleVoteClick('ADD_DOWNVOTE')} className="focus:outline-none">
-            <DownvoteOutlineIcon />
+            <DownvoteOutlineIcon className="fill-black dark:fill-white"/>
           </button>
         )}
       </div>
       <div className="p-2 md:p-3">
         <div className="pr-7">
-          <p className="text-xl text-black font-mono font-semibold tracking-tighter">{note.title}</p>
-          <p className="text-sm text-black font-mono font-medium tracking-tight">{note.description}</p>
+          <p className="text-xl text-black dark:text-white font-mono font-semibold tracking-tighter">{note.title}</p>
+          <p className="text-sm text-black dark:text-white font-mono font-medium tracking-tight">{note.description}</p>
         </div>
         <div style={{ marginTop: '10px' }}>
           <Chip
             label={note.country}
-            className="mr-1 mb-2 font-mono"
+            className="mr-1 mb-2 font-mono text-black dark:text-white"
             avatar={<Avatar alt="" src={`https://flagcdn.com/w80/${getCountryCode(note.country).toLowerCase()}.png`} />}
           />
           {note.region &&
             note.region.length > 0 &&
-            note.region.map((reg, index) => <Chip className="mr-1 mb-2 bg-green-200 font-mono" key={index} label={reg} />)}
+            note.region.map((reg, index) => <Chip className="mr-1 mb-2 bg-green-200 dark:bg-green-600 text-black dark:text-white font-mono" key={index} label={reg} />)}
           {note.categories &&
-            note.categories.map((category, index) => <Chip className="mr-1 mb-2 font-mono" key={index} label={category} />)}
+            note.categories.map((category, index) => <Chip className="mr-1 mb-2 font-mono text-black dark:text-white" key={index} label={category} />)}
           {note.author && (
-            <p className="text-gray-500 font-mono font-normal tracking-tight text-xs mb-2">added by {note.author}</p>
+            <p className="text-gray-500 dark:text-gray-300 font-mono font-normal tracking-tight text-xs mb-2">added by {note.author}</p>
           )}
         </div>
         <StreetViewThumbnail
