@@ -68,7 +68,7 @@ export default function AccountForm({ session }) {
   return (
     <div className="w-full">
       <div>
-        <label htmlFor="username" className="text-2xl font-bold text-black bg-transparent">
+        <label htmlFor="username" className="text-2xl font-bold text-black dark:text-white bg-transparent">
           @
         </label>
         <input
@@ -77,17 +77,17 @@ export default function AccountForm({ session }) {
           placeholder="Your username"
           value={username || ''}
           onChange={(e) => setUsername(e.target.value)}
-          className="text-2xl font-bold text-black bg-[rgba(0,0,0,0.05)] rounded-sm"
+          className="text-2xl font-bold text-black dark:text-white bg-[rgba(0,0,0,0.05)] dark:bg-[rgba(255,255,255,0.05)] rounded-sm"
         />
       </div>
       <div className="flex mb-4 mt-2">
-        <div className="text-md font-bold text-black mr-1">Email:</div>
+        <div className="text-md font-bold text-black dark:text-white mr-1">Email:</div>
         <input
           id="email"
           type="text"
           value={session?.user?.email}
           disabled
-          className="text-md font-bold text-black w-full"
+          className="text-md font-bold text-black dark:text-white w-full"
         />
       </div>
       {/* Hide name field for now */}
@@ -97,7 +97,7 @@ export default function AccountForm({ session }) {
           type="text"
           value={fullname || ''}
           onChange={(e) => setFullname(e.target.value)}
-          className="text-md font-bold text-black w-full bg-transparent"
+          className="text-md font-bold text-black dark:text-white w-full bg-transparent"
         />
       </div> */}
 
@@ -119,7 +119,7 @@ export default function AccountForm({ session }) {
 
       <div>
         <button
-          className="button primary block p-2 my-2 mr-2 bg-gray-300 rounded-md text-md font-semibold hover:bg-gray-200 border-2 border-gray-400"
+          className="button primary block p-2 my-2 mr-2 bg-gray-300 dark:bg-gray-800 rounded-md text-md font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 border-2 border-gray-400 dark:border-gray-600"
           onClick={() => updateProfile({ fullname, username, website, avatar_url })}
           disabled={loading}
         >
@@ -129,7 +129,7 @@ export default function AccountForm({ session }) {
 
       <div>
         <form action="/auth/signout" method="GET">
-          <button className="button primary block p-2 my-2 mr-2 bg-blue-400 rounded-md text-md font-semibold hover:bg-blue-300" type="submit">
+          <button className="button primary block p-2 my-2 mr-2 bg-blue-400 dark:bg-blue-800 rounded-md text-md font-semibold hover:bg-blue-300 dark:hover:bg-blue-700" type="submit">
             Sign out
           </button>
         </form>

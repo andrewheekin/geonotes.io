@@ -70,7 +70,7 @@ export default function Avatar({ uid, url, size, onUpload }) {
         <div className="avatar no-image" />
       )}
       <div style={{ width: size }}>
-        <label className="button primary block p-2 my-2 mr-2 bg-gray-300 rounded-md text-md font-semibold hover:bg-gray-200 border-2 border-gray-400" htmlFor="single">
+        <label className="button primary block p-2 my-2 mr-2 bg-gray-300 dark:bg-gray-800 rounded-md text-md font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 border-2 border-gray-400 dark:border-gray-600" htmlFor="single">
           {uploading ? 'Uploading ...' : 'Upload avatar'}
         </label>
         <input
