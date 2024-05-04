@@ -1,10 +1,10 @@
 'use client';
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
 import Link from 'next/link';
-import {useRouter} from 'next/navigation';
-import {createGeoNote} from '../_lib/actions';
+import { useRouter } from 'next/navigation';
+import { createGeoNote } from '../_lib/actions';
 import countries from '../_lib/CountriesList';
 import regions from '../_lib/RegionsList';
 import categories from '../_lib/CategoriesList';
