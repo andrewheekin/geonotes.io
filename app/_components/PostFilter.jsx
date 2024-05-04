@@ -1,15 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import {useEffect, useState} from 'react';
+import {createClientComponentClient} from '@supabase/auth-helpers-nextjs';
+import {useSearchParams, usePathname, useRouter} from 'next/navigation';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import SettingsIcon from '@mui/icons-material/Settings'; // or NewReleasesIcon if you prefer
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import { loginToFilterGeoNotes } from '../_lib/toasts';
-import { IS_MOBILE } from '../_lib/helpers';
+import {loginToFilterGeoNotes} from '../_lib/toasts';
+import {IS_MOBILE} from '../_lib/helpers';
 
 export default function PostFilter() {
   const supabase = createClientComponentClient();
@@ -18,7 +18,7 @@ export default function PostFilter() {
   const [postSortType, setPostSortType] = useState('');
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const {replace} = useRouter();
 
   // async useEffect that checks if user is authenticated within a try catch block
   // Initialize the displayType and postSortType from the URL params (or fallback to defaults)
@@ -26,7 +26,7 @@ export default function PostFilter() {
     const checkIfAuthenticated = async () => {
       try {
         const {
-          data: { user },
+          data: {user},
         } = await supabase.auth.getUser();
         if (user) {
           setIsAuthenticated(true);
@@ -96,51 +96,51 @@ export default function PostFilter() {
     replace(newParams);
   };
 
-  const buttonBaseClass = 'text-black text-sm font-mono font-bold py-1 px-2 rounded-xl active:bg-gray-300';
+  const buttonBaseClass = 'text-black dark:text-white text-sm font-mono font-bold py-1 px-2 rounded-xl active:bg-gray-300 dark:active:bg-gray-800';
 
   return (
-    <div className="flex justify-between items-center my-4 p-2 w-full rounded-lg bg-gray-200">
+    <div className="flex justify-between items-center my-4 p-2 w-full rounded-lg bg-gray-200 dark:bg-gray-700">
       {/* Sorting Options */}
       <div className="flex gap-2">
         <button
           className={`${buttonBaseClass} ${
-            postSortType === 'hot' ? 'bg-gray-300' : 'bg-transparent hover:text-gray-500'
+            postSortType === 'hot' ? 'bg-gray-300 dark:bg-gray-800' : 'bg-transparent hover:text-gray-500 dark:hover:text-gray-400'
           }`}
           onClick={() => handleChangePostSortType('hot')}
         >
-          <WhatshotIcon className="mr-2" /> Hot
+          <WhatshotIcon className="mr-2"/> Hot
         </button>
         <button
           className={`${buttonBaseClass} ${
-            postSortType === 'new' ? 'bg-gray-300' : 'bg-transparent hover:text-gray-500'
+            postSortType === 'new' ? 'bg-gray-300 dark:bg-gray-800' : 'bg-transparent hover:text-gray-500 dark:hover:text-gray-400'
           }`}
           onClick={() => handleChangePostSortType('new')}
         >
-          <SettingsIcon className="mr-2" /> New
+          <SettingsIcon className="mr-2"/> New
         </button>
         <button
           className={`${buttonBaseClass} ${
-            postSortType === 'top' ? 'bg-gray-300' : 'bg-transparent hover:text-gray-500'
+            postSortType === 'top' ? 'bg-gray-300 dark:bg-gray-800' : 'bg-transparent hover:text-gray-500 dark:hover:text-gray-400'
           }`}
           onClick={() => handleChangePostSortType('top')}
         >
-          <TrendingUpIcon className="mr-2" /> Top
+          <TrendingUpIcon className="mr-2"/> Top
         </button>
       </div>
 
       {/* Display Options */}
       <div>
         <button
-          className={`p-2 rounded ${displayType === 'list' ? 'bg-gray-300' : 'bg-transparent'}`}
+          className={`p-2 rounded ${displayType === 'list' ? 'bg-gray-300 dark:bg-gray-800' : 'bg-transparent'}`}
           onClick={() => handleChangeDisplayType('list')}
         >
-          <ViewListIcon />
+          <ViewListIcon/>
         </button>
         <button
-          className={`p-2 rounded ${displayType === 'grid' ? 'bg-gray-300' : 'bg-transparent'}`}
+          className={`p-2 rounded ${displayType === 'grid' ? 'bg-gray-300 dark:bg-gray-800' : 'bg-transparent'}`}
           onClick={() => handleChangeDisplayType('grid')}
         >
-          <ViewModuleIcon />
+          <ViewModuleIcon/>
         </button>
       </div>
     </div>

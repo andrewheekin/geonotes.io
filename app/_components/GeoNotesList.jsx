@@ -51,11 +51,11 @@ export default async function GeoNotesList({ searchParams }) {
           ))}
         </div>
       ) : (
-        <div className="text-center bg-[rgba(0,0,0,0.05)] p-4 rounded-lg">
-          <p className="text-xl text-black font-semibold tracking-tighter">{missingGeoNoteText}</p>
-          <p className="text-xl text-black font-normal tracking-tight"> :(</p>
+        <div className="text-center bg-[rgba(0,0,0,0.05)] dark:bg-[rgba(255,255,255,0.05)] p-4 rounded-lg">
+          <p className="text-xl text-black dark:text-white font-semibold tracking-tighter">{missingGeoNoteText}</p>
+          <p className="text-xl text-black dark:text-white font-normal tracking-tight"> :(</p>
           <div className="m-8">
-            <Link href="/submit" className="text-lg underline hover:text-gray-500 font-semibold p-2">
+            <Link href="/submit" className="text-lg underline hover:text-gray-500 dark:hover:text-gray-400 font-semibold p-2">
               Add one!
             </Link>
           </div>

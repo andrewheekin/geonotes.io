@@ -7,8 +7,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { motion } from 'framer-motion'; // Import motion
 import { IS_MOBILE } from '../_lib/helpers';
 import { loginToAddGeoNotesToast } from '../_lib/toasts';
+import { ToggleTheme } from "../_components/ToggleTheme";
 
-export default function Navbar({ user }) {
+export default function Navbar({user}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLinkClick = () => {
@@ -18,24 +19,24 @@ export default function Navbar({ user }) {
   };
 
   return (
-    <nav className="bg-transparent shadow-none container mx-auto flex flex-wrap items-center justify-between px-4 py-2">
+    <nav
+      className="bg-transparent shadow-none container mx-auto flex flex-wrap items-center justify-between px-4 py-2">
       <div className="flex items-end">
-        <Image src="globe.png" alt="Globe" width={30} height={30} unoptimized className="mr-2" />
+        <Image src="globe.png" alt="Globe" width={30} height={30} unoptimized className="mr-2"/>
         <Link href="/" className="flex flex-col">
-          <div className="text-2xl text-black font-bold tracking-tighter">GeoNotes</div>
+          <div className="text-2xl text-black dark:text-white font-bold tracking-tighter">GeoNotes</div>
         </Link>
       </div>
       <div className="md:hidden">
         <button onClick={() => setIsOpen(!isOpen)}>
-          {/* Hamburger Icon */}
           <svg
-            className="w-6 h-6"
+            className="w-6 h-6 stroke-black dark:stroke-white"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
             viewBox="0 0 24 24"
-            stroke="black"
+
           >
             <path d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
@@ -48,27 +49,30 @@ export default function Navbar({ user }) {
         variants={
           IS_MOBILE()
             ? {
-                open: { display: 'block', height: 'auto', transition: { duration: 0.3, type: 'spring' } },
-                closed: { display: 'none', height: 0, transition: { duration: 0.2 } },
-              }
-            : { open: {}, closed: {} }
+              open: {display: 'block', height: 'auto', transition: {duration: 0.3, type: 'spring'}},
+              closed: {display: 'none', height: 0, transition: {duration: 0.2}},
+            }
+            : {open: {}, closed: {}}
         }
         initial="closed"
       >
-        <ul className="pt-4 items-center md:flex md:justify-between md:pt-0">
+        <ul className="items-center md:flex md:justify-between pt-4">
+          <li>
+            <ToggleTheme className="block mt-4 md:mt-0 md:ml-4"></ToggleTheme>
+          </li>
           <li>
             <Link
               href="https://github.com/andrewheekin/geonotes.io"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight"
+              className="block mt-4 md:mt-0 md:ml-4 text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-300 font-semibold tracking-tight"
               onClick={handleLinkClick}
             >
-              <GitHubIcon />
+              <GitHubIcon/>
             </Link>
           </li>
           <li>
             <Link
               href="/"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight px-2"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-300 font-semibold tracking-tight px-2"
               onClick={handleLinkClick}
             >
               Home
@@ -77,7 +81,7 @@ export default function Navbar({ user }) {
           <li>
             <Link
               href="/about"
-              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black hover:text-gray-500 font-semibold tracking-tight px-2"
+              className="block mt-4 md:inline-block md:mt-0 md:ml-4 text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-300 font-semibold tracking-tight px-2"
               onClick={handleLinkClick}
             >
               About
@@ -91,13 +95,15 @@ export default function Navbar({ user }) {
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2"
                   onClick={handleLinkClick}
                 >
-                  <div className="text-black hover:text-gray-500 font-semibold tracking-tight">Account</div>
+                  <div
+                    className="text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-300 font-semibold tracking-tight">Account
+                  </div>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/submit"
-                  className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] duration-100 rounded"
+                  className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black dark:text-white font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] dark:hover:bg-[rgba(255,255,255,0.1)] duration-100 rounded"
                   onClick={handleLinkClick}
                 >
                   Add GeoNote
@@ -112,7 +118,9 @@ export default function Navbar({ user }) {
                   className="block mt-4 md:inline-block md:mt-0 md:ml-4  px-2"
                   onClick={handleLinkClick}
                 >
-                  <div className="text-black hover:text-gray-500 font-semibold tracking-tight">Login</div>
+                  <div
+                    className="text-black dark:text-white hover:text-gray-500 font-semibold tracking-tight">Login
+                  </div>
                 </Link>
               </li>
               <li>
@@ -121,7 +129,7 @@ export default function Navbar({ user }) {
                     loginToAddGeoNotesToast();
                     handleLinkClick();
                   }}
-                  className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] duration-100 rounded"
+                  className="bg-transparent block mt-4 py-2 px-4 md:inline-block md:mt-0 md:ml-4 text-black dark:text-white font-semibold tracking-tight cursor-pointer border-2 border-gray-600 hover:bg-[rgba(0,0,0,0.1)] duration-100 rounded"
                 >
                   Add GeoNote
                 </div>

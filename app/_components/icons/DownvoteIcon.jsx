@@ -2,7 +2,6 @@ export default function DownvoteIcon({ className }) {
   return (
     <div className="group">
       <svg
-        fill="#000000"
         width="22px"
         height="22px"
         viewBox="0 0 24 24"

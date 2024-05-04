@@ -1,6 +1,7 @@
 import { Open_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { getUserSession } from './_lib/server-data';
+import { ThemeProvider } from 'next-themes';
 import Footer from './_components/Footer';
 import Navbar from './_components/Navbar';
 import Gradient from './_components/Gradient';
@@ -20,16 +21,25 @@ export default async function RootLayout({ children }) {
   const user = userSession?.user;
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body className={open_sans.className}>
-        <Gradient />
-        <Navbar user={user} />
-        <main className="flex flex-col items-center min-h-screen p-2 md:p-4">
+      <ThemeProvider
+          defaultTheme='system'
+          storageKey='theme'
+          attribute='class'
+          enableSystem
+          disableTransitionOnChange
+          suppressHydrationWarning
+      >
+          <Gradient />
+          <Navbar user={user} />
+          <main className="flex flex-col items-center min-h-screen p-2 md:p-4">
           <GeoNotesToaster font={open_sans} />
           {children}
         </main>
         <Footer />
         <Analytics />
+      </ThemeProvider>
       </body>
     </html>
   );
